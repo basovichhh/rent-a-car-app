@@ -13,7 +13,7 @@ html,body{
   height: 100%;
   width: 100%;
   place-items: center;
-  background-image:url("bg_2.jpg"); 
+  background-image:url("bg_1.jpg"); 
   width: 100%;
   height: 100vh;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@ header{
   margin: 0;
   padding: 0px;
   overflow: hidden;
-  background: linear-gradient(-135deg, #62c850, #044424); /* updated background */
+  background: linear-gradient(-135deg, #378F99, #0054A6); /* updated background */
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -65,7 +65,7 @@ header{
 }
 
 .nav_links li a:hover {
-  background: linear-gradient(-135deg, #62c850, #044424); /* updated background */
+  background: linear-gradient(-135deg, #378F99, #0054A6); /* updated background */
   text-align: right;
 }
 .nav_links ul{
@@ -92,7 +92,7 @@ header{
   color: #fff;
   user-select: none;
   border-radius: 15px 15px 0 0;
-  background: linear-gradient(-135deg, #62c850, #044424);
+  background: linear-gradient(-135deg, #378F99, #0054A6);
 }
 .wrapper form{
   padding: 10px 30px 50px 30px;
@@ -170,7 +170,7 @@ form .field input[type="submit"]{
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
-  background: linear-gradient(-135deg, #62c850, #044424);
+  background: linear-gradient(-135deg, #378F99, #0054A6);
   transition: all 0.3s ease;
 }
 form .field input[type="submit"]:active{
