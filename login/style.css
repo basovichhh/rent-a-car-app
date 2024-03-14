@@ -36,7 +36,7 @@ header{
   margin: 0;
   padding: 0px;
   overflow: hidden;
-  background: linear-gradient(-135deg, #378F99, #0054A6); /* updated background */
+  background: linear-gradient(-135deg, #378F99, #0054A6); 
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -65,7 +65,7 @@ header{
 }
 
 .nav_links li a:hover {
-  background: linear-gradient(-135deg, #378F99, #0054A6); /* updated background */
+  background: linear-gradient(-135deg, #378F99, #0054A6);
   text-align: right;
 }
 .nav_links ul{
@@ -195,22 +195,3 @@ form .signup-link a{
   color: #4158d0;
   text-decoration: none !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
