@@ -9152,6 +9152,8 @@ textarea.form-control {
 .ftco-footer {
   font-size: 16px;
   background: #000;
+  display: flex;
+  justify-content: center;
   padding: 7em 0; }
   .ftco-footer .logo {
     text-transform: uppercase;
@@ -9833,6 +9835,26 @@ textarea.form-control {
   .sidebar-box h3 {
     font-size: 18px;
     margin-bottom: 15px; }
+
+
+.book-now {
+  font-family: 'Popins', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  height: 60px;
+  width: 110px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.book-now:hover {
+  background-color: #007bff;
+  color: black;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; 
+}
 
 .categories li, .sidelink li {
   position: relative;

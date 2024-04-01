@@ -177,3 +177,7 @@ header{
   form .field input[type="submit"]:active{
     transform: scale(0.95);
   }
+
+  .save-button{
+    margin-bottom: auto;
+  }
