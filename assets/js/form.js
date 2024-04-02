@@ -1,4 +1,5 @@
 var users = [];
+var trips = [];
 var idCounter = 1;
 
 
@@ -74,6 +75,53 @@ $("#login-form").validate({
     },
   });
 
+  $("#contact-form").validate({
+    rules: {
+        name: {
+            required: true,
+            minlength: 5,
+        },
+        email: {
+            required: true,
+            email: true,
+        },
+        message: {
+            required: true,
+            maxlength: 500,
+        },
+    },
+    messages: {
+        name: {
+            required: "Please enter your name.",
+            minlength: "Name must be at least 5 characters.",
+        },
+        email: {
+            required: "Please enter your email address.",
+            email: "Please enter a valid email address.",
+        },
+        message: {
+            required: "Please enter your message.",
+            maxlength: "Message cannot exceed 500 characters.",
+        },
+    },
+    submitHandler: function (form, event) {
+        event.preventDefault();
+        blockUi("#contact-form");
+        let formData = $(form).serialize();
+
+        console.log("Contact form data:", formData);
+        unblockUi("#contact-form");
+
+        // Assuming 'users' is defined elsewhere
+        users.push(formData);
+        $(form)[0].reset();
+        console.log(users);
+
+        alert("Your response was submitted successfully.");
+    },
+});
+
+
 
   $("#edit-profile-form").validate({
     rules: {
@@ -91,7 +139,7 @@ $("#login-form").validate({
         required: "You have to fill it in!",
         minlength: "Too short buddy!",
       },
-      bio: { // Corrected field name from 'first_name' to 'bio'
+      bio: { 
         required: "Bio is required!",
         maxlength: "Bio cannot exceed 500 characters!",
       },
@@ -169,6 +217,74 @@ $("#login-form").validate({
         },
     });
 });
+
+$("#pick-up-date, #drop-off-date").datepicker({
+  dateFormat: 'yy-mm-dd' // Adjust the date format as needed
+});
+
+$("#pick-up-time").timepicker({
+  timeFormat: 'HH:mm', // Adjust the time format as needed
+  interval: 15, // Interval of 15 minutes
+  minTime: '00:00', // Minimum time
+  maxTime: '23:45', // Maximum time
+  defaultTime: '12:00', // Default time
+  startTime: '00:00', // Start time
+  dynamic: false,
+  dropdown: true,
+  scrollbar: true
+});
+
+$("#rent-form").validate({
+  rules: {
+      "pick-up-location": {
+          required: true,
+      },
+      "drop-off-location": {
+          required: true,
+      },
+      "pick-up-date": {
+          required: true,
+      },
+      "drop-off-date": {
+          required: true,
+      },
+      "pick-up-time": {
+          required: true,
+      },
+  },
+  messages: {
+      "pick-up-location": {
+          required: "Please enter pick-up location.",
+      },
+      "drop-off-location": {
+          required: "Please enter drop-off location.",
+      },
+      "pick-up-date": {
+          required: "Please select pick-up date.",
+      },
+      "drop-off-date": {
+          required: "Please select drop-off date.",
+      },
+      "pick-up-time": {
+          required: "Please enter pick-up time.",
+      },
+  },
+  submitHandler: function (form, event) {
+      event.preventDefault();
+      blockUi("#rent-form");
+      let formData = $(form).serialize();
+
+      console.log("Rent form data:", formData);
+      unblockUi("#rent-form");
+
+      trips.push(formData);
+      $(form)[0].reset();
+      console.log(trips);
+
+      alert("Your trip has been booked successfully.");
+  },
+});
+
 
 
 
