@@ -19,7 +19,7 @@
             <!-- Profile Edit Form -->
             <div class="col-md-6">
                 <h2>Edit Profile</h2>
-                <form>
+                <form id="edit-profile-form" method="post">
                      <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name">
@@ -43,21 +43,26 @@
     
             <div class="col-md-5">
                 <h2>Change Password</h2>
-                <form>
+                <form id="change-password-form" method="post">
                     <div class="mb-3">
-                        <label for="current-password" class="form-label">Current Password</label>
-                        <input type="password" class="form-control" id="current-password" name="current-password">
+                        <label for="current_password" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="current_password" name="current-password">
                     </div>
                     <div class="mb-3">
-                        <label for="new-password" class="form-label">New Password</label>
-                        <input type="password" class="form-control" id="new-password" name="new-password">
+                        <label for="new_password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="new_password" name="new-password">
                     </div>
                     <div class="mb-3">
-                        <label for="confirm-new-password" class="form-label">Confirm New Password</label>
-                        <input type="password" class="form-control" id="confirm-new-password" name="confirm-new-password">
+                        <label for="confirm_password" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm-new-password">
                     </div>
                     <button type="submit" class="btn btn-primary">Change Password</button>
                 </form>
             </div>
+
+
+            <script src="./assets/js/block-ui.js"></script>
+            <script src="./assets/js/jquery.validate.min.js"></script>
+            <script src="./assets/js/form.js"></script>
   </body>
 </html>
