@@ -1,27 +1,33 @@
-getCars = () => {
-    $.get("cars.json", (data) => {
-        let output = '';
-        data.forEach((car) => {
-            output +=  `
-                <div class="col-md-4">
-                    <div class="car-wrap rounded ftco-animate">
-                        <div class="img rounded d-flex align-items-end" style="background-image: url(theme/images/${car.image});">
-                        </div>
-                        <div class="text">
-                            <h2 class="mb-0"><a href="#c-class">${car.name}</a></h2>
-                            <div class="d-flex mb-3">
-                                <span class="cat">${car.manufacturer}</span>
-                                <p class="price ml-auto">${car.price}/day<span></span></p>
-                            </div>
-                            <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#c-class" class="btn btn-secondary py-2 ml-1">Details</a></p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+$(document).ready(function () {
+  // Function to fetch and display cars
+  function getCars() {
+      $.get("cars.json", function (data) {
+          displayCars(data);
+      });
+  }
 
-        $(".row").append(output);
-    });
-}
+  // Function to display car cards
+  function displayCars(data) {
+      data.forEach(function (car) {
+          var carHTML = `
+              <div class="col-md-4 mb-4">
+                  <div class="card">
+                      <img src="theme/images/${car.image}" class="card-img-top" alt="${car.name}">
+                      <div class="card-body">
+                          <h5 class="card-title">${car.name}</h5>
+                          <p class="card-text">${car.manufacturer}</p>
+                          <p class="card-text">${car.price}</p>
+                          <a href="#" class="btn btn-primary">Book Now</a>
+                          <a href="car${car.id}.html" class="btn btn-secondary">Details</a>
+                      </div>
+                  </div>
+              </div>
+          `;
+          // Append each car to the container with class "row" inside the section with class "ftco-section bg-light"
+          $(".ftco-section.bg-light .row").append(carHTML);
+      });
+  }
 
-getCars();
+  // Call getCars function to fetch and display cars
+  getCars();
+});
