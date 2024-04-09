@@ -7,7 +7,7 @@
   
       config = $.extend({
         defaultView  : $("main#jqueryspapp > section:last-child").attr("id"),
-        templateDir  : './views/',
+        templateDir  : './pages/',
         pageNotFound : false
       }, options );
   

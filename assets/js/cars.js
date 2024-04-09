@@ -1,7 +1,7 @@
 $(document).ready(function () {
   // Function to fetch and display cars
   function getCars() {
-      $.get("cars.json", function (data) {
+      $.get("./data-json/cars.json", function (data) {
           displayCars(data);
       });
   }
@@ -12,13 +12,13 @@ $(document).ready(function () {
           var carHTML = `
               <div class="col-md-4 mb-4">
                   <div class="card">
-                      <img src="theme/images/${car.image}" class="card-img-top" alt="${car.name}">
+                      <img src="assets/images/${car.image}" class="card-img-top" alt="${car.name}">
                       <div class="card-body">
                           <h5 class="card-title">${car.name}</h5>
                           <p class="card-text">${car.manufacturer}</p>
                           <p class="card-text">${car.price}</p>
                           <a href="#" class="btn btn-primary">Book Now</a>
-                          <a href="car${car.id}.html" class="btn btn-secondary">Details</a>
+                          <a href="/rent-a-car-app/pages/car${car.id}.html" class="btn btn-secondary">Details</a>
                       </div>
                   </div>
               </div>
