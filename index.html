@@ -58,12 +58,6 @@
     <main id="jqueryspapp" role="main">
 
       <!-- Main pages -->
-
-      <section id="login" data-load="pages/login.html"></section>
-      <section id="register" data-load="/register.html"></section>
-
-
-
       <section id="pocetna" data-load="pages/pocetna.html"></section>
       <section id="about" data-load="pages/about.html"></section>
       <section id="services" data-load="pages/services.html"></section>
@@ -136,10 +130,6 @@
 
   <script type="text/javascript">
 	$(document).ready(function() {
-    var app = $.jQuerySPApp({defaultView : "login"});
-    var app = $.jQuerySPApp({defaultView : "register"});
-
-
 		var app = $.jQuerySPApp({defaultView : "pocetna"});
 
 		app.route({view: 'pocetna', load: 'pocetna.html'});
@@ -164,7 +154,6 @@
     app.route({view: 'amg-gt-s', load: 'car-details-amg-gt-s.html'});
     app.route({view: 'jeep', load: 'car-details-jeep.html'});
     app.route({view: 'range-evoque', load: 'car-details-range-evoque.html'});
-
 
 		app.run();
 	});
