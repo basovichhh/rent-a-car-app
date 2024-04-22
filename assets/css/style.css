@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --blue: #007bff;
+  --blue: #c;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -57,7 +57,9 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+  background-color: #fff; 
+  
+}
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -9968,3 +9970,47 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+.rent-a-car #rent-button {
+  padding: 15px 30px; 
+  font-size: 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+  .rent-a-car #rent-button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles for hatchbacLocationHeading */
+.hatchbacLocationHeading {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.hatchbacLocationHeading h1 {
+  font-size: 24px;
+  color: #333; /* Adjust the color as needed */
+  position: relative; /* Required for the pseudo-element */
+}
+
+/* Blue line */
+.hatchbacLocationHeading h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Adjust the distance from the heading */
+  left: 50%;
+  width: 100px; /* Adjust the width of the line */
+  height: 2px; /* Adjust the thickness of the line */
+  background-color: #007bff; /* Blue color */
+  transform: translateX(-50%);
+}
+
+
+
