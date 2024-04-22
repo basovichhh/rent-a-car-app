@@ -1,17 +1,14 @@
 <?php
+require_once 'BaseService.php';
+require_once __DIR__ . "/../dao/CarDao.class.php";
 
-require_once __DIR__ . '/../dao/CarDao.class.php';
-
-
-class CarService {
-
-    private $car_dao;
-
-    public function __construct(){
-        $this->car_dao = new CarDao();
+//I messed something here up, so this service lost complete connection to the localhost
+//it needs to be checked
+class CarService extends BaseService
+{
+    public function __construct()
+    {
+        parent::__construct(new VehicleDao);
     }
 
-    public function add_car($car){
-        return $this->car_dao->add_car($car);
-    }
 }
