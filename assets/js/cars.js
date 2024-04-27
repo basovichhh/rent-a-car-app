@@ -17,7 +17,7 @@ $(document).ready(function () {
                           <h5 class="card-title">${car.name}</h5>
                           <p class="card-text">${car.manufacturer}</p>
                           <p class="card-text">${car.price}</p>
-                          <a href="#" class="btn btn-primary">Book Now</a>
+                          <a href="../rent-a-car-app/pages/book-car.html" class="btn btn-primary">Book Now</a>
                           <a href="../rent-a-car-app/pages/car${car.id}.html" class="btn btn-secondary">Details</a>
                       </div>
                   </div>
