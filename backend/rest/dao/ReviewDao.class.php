@@ -11,9 +11,6 @@ class ReviewDao extends BaseDao
     }
 
 
-    // custom function, which is not present in BaseDao
-    // query_unique -> returns only 1 result if multiple are present
-    //function to get a name and last name of the employee based on its id and location_id
     function getCarsWithCertainScores($review_score)
     {
         return $this->query("SELECT *

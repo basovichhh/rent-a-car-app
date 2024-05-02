@@ -69,9 +69,4 @@ class BaseDao{
         $entity['id'] = $id;
         $stmt->execute($entity);
     }
-
-    protected function query_unique($query, $params) {
-        $results = $this->query($query, $params);
-        return reset($results);
-    }
 }

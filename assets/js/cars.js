@@ -8,7 +8,7 @@ $(document).ready(function () {
 
   // Function to display car cards
   function displayCars(data) {
-      data.forEach(function (car) {
+      data.forEach(function (car, index) {
           var carHTML = `
               <div class="col-md-4 mb-4">
                   <div class="card">
@@ -17,7 +17,7 @@ $(document).ready(function () {
                           <h5 class="card-title">${car.name}</h5>
                           <p class="card-text">${car.manufacturer}</p>
                           <p class="card-text">${car.price}</p>
-                          <a href="../rent-a-car-app/pages/book-car.html" class="btn btn-primary">Book Now</a>
+                          <a href="../rent-a-car-app/pages/book-car${index}.html" class="btn btn-primary">Book Now</a>
                           <a href="../rent-a-car-app/pages/car${car.id}.html" class="btn btn-secondary">Details</a>
                       </div>
                   </div>

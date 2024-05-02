@@ -3,11 +3,11 @@
 require 'vendor/autoload.php';
 
 // import and register all business logic files (services) to FlightPHP
-require_once __DIR__ . '/services/UserService.php';
-require_once __DIR__ . '/services/BookingService.php';
-require_once __DIR__ . '/services/LocationService.php';
-require_once __DIR__ . '/services/ReviewService.php';
-require_once __DIR__ . '/services/CarService.php';
+require_once __DIR__ . '/services/UserService.class.php';
+require_once __DIR__ . '/services/BookingService.class.php';
+require_once __DIR__ . '/services/LocationService.class.php';
+require_once __DIR__ . '/services/ReviewService.class.php';
+require_once __DIR__ . '/services/CarService.class.php';
 
 Flight::register('userService', "UserService");
 Flight::register('bookingService', "BookingService");
@@ -28,4 +28,3 @@ Flight::route('GET /api/', function () {
 });
 
 Flight::start();
-?>

@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../dao/CarDao.class.php';
 
 
-class CarService {
+class BaseService {
     protected $dao;
     public function __construct($dao){
         $this->dao = $dao;
