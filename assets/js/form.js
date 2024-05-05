@@ -286,7 +286,59 @@ $("#rent-form").validate({
 });
 
 
-
+$(document).ready(function () {
+  $("#payment-form").validate({
+      rules: {
+          full_name: {
+              required: true,
+              minlength: 5,
+          },
+          credit_card_number: {
+              required: true,
+              minlength: 16,
+          },
+          card_exp_date: {
+              required: true,
+              minlength: 5,
+          },
+          card_cvv: {
+              required: true,
+              minlength: 3,
+          },
+          card_zip_code: {
+              required: true,
+              minlength: 5,
+          },
+      },
+      messages: {
+          full_name: {
+              required: "Please enter your full name.",
+              minlength: "Full name must be at least 5 characters long.",
+          },
+          credit_card_number: {
+              required: "Please enter your credit card number.",
+              minlength: "Credit card number must be 16 digits long.",
+          },
+          card_exp_date: {
+              required: "Please enter the expiration date.",
+              minlength: "Please enter in the format MM/YY.",
+          },
+          card_cvv: {
+              required: "Please enter your CVV.",
+              minlength: "CVV must be 3 digits long.",
+          },
+          card_zip_code: {
+              required: "Please enter your zip code.",
+              minlength: "Zip code must be 5 digits long.",
+          },
+      },
+      submitHandler: function (form, event) {
+          event.preventDefault();
+          // Your form submission logic here
+          console.log("Form submitted successfully!");
+      },
+  });
+});
 
   
   
