@@ -1,5 +1,5 @@
 <?php
-require_once 'BaseService.php';
+require_once __DIR__ . "/BaseService.class.php";
 require_once __DIR__ . "/../dao/LocationDao.class.php";
 
 
@@ -16,8 +16,4 @@ class LocationService extends BaseService
         return $this->dao->getNumberOfBookingsPerLocation($location_id);
     }
 
-    function getContactInfo($id) 
-    {
-        return $this->dao->getContactInfo($id);
-    }
 }

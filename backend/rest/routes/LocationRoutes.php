@@ -14,10 +14,6 @@ Flight::route('GET /locations/bookings/@location_id', function ($location_id) {
     Flight::json(Flight::locationService()->getNumberOfBookingsPerLocation($location_id));
 });
 
-Flight::route('GET /locations/contact/@id', function ($id) {
-    Flight::json(Flight::locationService()->getContactInfo($id));
-});
-
 Flight::route('DELETE /locations/@location_id', function ($location_id) {
     Flight::locationService()->delete($location_id);
 });

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../config.php';
 
 class BaseDao{
     protected $connection;
@@ -20,6 +20,12 @@ class BaseDao{
         $stmt = $this->connection->prepare($query);
         $stmt->execute($params);
         return $stmt;
+    }
+
+    protected function query_unique($query, $params)
+    {
+        $results = $this->query($query, $params);
+        return reset($results);
     }
 
     function get_all() {
@@ -68,5 +74,6 @@ class BaseDao{
         $stmt = $this->connection->prepare($query);
         $entity['id'] = $id;
         $stmt->execute($entity);
+        return $entity;
     }
 }

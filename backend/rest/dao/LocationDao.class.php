@@ -10,12 +10,11 @@ class LocationDao extends BaseDao
     }
 
 
-    //  function getNumberOfBookingsPerLocation($location_id)
-    // {
-    //     return $this->query_unique("SELECT COUNT(b.id) AS number_of_bookings_per_location
-    //     FROM bookings b
-    //     JOIN locations l ON b.location_id = l.id
-    //     WHERE l.id = :l.id", ["id" => $location_id]); 
-    // }
+    function getNumberOfBookingsPerLocation($location_id){
+        return $this->query_unique("SELECT COUNT(b.id) AS number_of_bookings_per_location
+        FROM bookings b
+        JOIN locations l ON b.location_id = l.id
+        xWHERE l.id = :l.id", ["id" => $location_id]); 
+     }
 }
 

@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../dao/CarDao.class.php';
 
 
 class BaseService {
