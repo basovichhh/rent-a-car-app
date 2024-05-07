@@ -34,25 +34,24 @@ class BaseDao{
     }
 
     function getById($id) {
-        $stmt = $this->query("SELECT * FROM " . $this->table_name . " WHERE id = :id", ["id" => $id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->query_unique("SELECT * FROM " . $this->table_name . " WHERE id = :id", ["id" => $id]);
     }
 
-    public function add($entity) {
-        $query = "INSERT INTO " . $this->table_name . " (" ;
+    public function insert($table, $entity) {
+        $query = "INSERT INTO {$table} (";
         foreach ($entity as $column => $value) {
-            $query .= $column . ", ";
+        $query .= $column . ", ";
         }
         $query = substr($query, 0, -2);
         $query .= ") VALUES (";
         foreach ($entity as $column => $value) {
-            $query .= ":" . $column . ", ";
+        $query .= ":" . $column . ", ";
         }
         $query = substr($query, 0, -2);
         $query .= ")";
 
-        $stmt = $this->connection->prepare($query);
-        $stmt->execute($entity); // sql injection prevention
+        $statement = $this->connection->prepare($query);
+        $statement->execute($entity); // SQL injection prevention
         $entity['id'] = $this->connection->lastInsertId();
         return $entity;
     }
@@ -76,4 +75,15 @@ class BaseDao{
         $stmt->execute($entity);
         return $entity;
     }
+
+//     protected function execute($query, $params){
+//     $prepared_statement = $this->connection->prepare($query);
+//     if ($params) {
+//       foreach ($params as $key => $param) {
+//         $prepared_statement->bindValue($key, $param);
+//       }
+//     }
+//     $prepared_statement->execute();
+//     return $prepared_statement;
+//   }
 }
