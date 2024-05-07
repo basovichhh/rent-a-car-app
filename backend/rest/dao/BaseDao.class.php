@@ -37,24 +37,26 @@ class BaseDao{
         return $this->query_unique("SELECT * FROM " . $this->table_name . " WHERE id = :id", ["id" => $id]);
     }
 
-    public function insert($table, $entity) {
-        $query = "INSERT INTO {$table} (";
+    public function add($entity) {
+        $query = "INSERT INTO " . $this->table_name . " (" ;
         foreach ($entity as $column => $value) {
-        $query .= $column . ", ";
+            $query .= $column . ", ";
         }
         $query = substr($query, 0, -2);
         $query .= ") VALUES (";
         foreach ($entity as $column => $value) {
-        $query .= ":" . $column . ", ";
+            $query .= ":" . $column . ", ";
         }
         $query = substr($query, 0, -2);
         $query .= ")";
 
-        $statement = $this->connection->prepare($query);
-        $statement->execute($entity); // SQL injection prevention
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute($entity); // sql injection prevention
         $entity['id'] = $this->connection->lastInsertId();
         return $entity;
     }
+    
+    
 
     public function delete($id) {
         $stmt = $this->connection->prepare("DELETE FROM " . $this->table_name . " WHERE id=:id");

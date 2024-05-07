@@ -7,11 +7,6 @@ class CarService extends BaseService{
     private $car_dao;
     
     public function __construct(){
-        $this->car_dao = new CarDao();
+        parent::__construct(new CarDao);
     }
-
-    public function add_car($car){
-        return $this->car_dao->add_car($car);
-    }
- 
 }

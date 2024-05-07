@@ -41,7 +41,7 @@ Flight::route('GET /api/cars', function () {
 
 Flight::route('POST /api/cars', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::carService()->add_car($data));
+    Flight::json(Flight::carService()->add($data));
 });
 
 
@@ -50,10 +50,11 @@ Flight::route('DELETE /api/cars/@car_id', function ($car_id) {
 });
 
 Flight::route('GET /api/cars/@car_id', function ($car_id) {
-    Flight::json(Flight::carService()->get_by_id($car_id));
+    Flight::json(Flight::carService()->get_car_by_id($car_id));
 });
 
 Flight::route("PUT /api/cars/@car_id", function($car_id){
     $data = Flight::request()->data->getData();
-    Flight::json(['message' => 'Vehicle info edited succesfully', 'data' => Flight::carService()->update($data, $car_id)]); 
+    Flight::carService()->update($car_id, $data);
+    Flight::json(Flight::carService()->getById($car_id));
 });

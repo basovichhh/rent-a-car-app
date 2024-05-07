@@ -23,7 +23,8 @@ $(document).ready(function () {
                   </div>
               </div>
           `;
-          // Append each car to the container with class "row" inside the section with class "ftco-section bg-light"
+
+          // append each car
           $(".ftco-section.bg-light .row").append(carHTML);
       });
   }

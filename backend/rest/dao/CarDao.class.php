@@ -9,24 +9,19 @@ class CarDao extends BaseDao
         parent::__construct('cars');  
     }
 
-    public function add_car($car) {
-        return $this->insert('cars', $car);
-      }
+    public function add_car() {
+        return $this->add('cars');
+    }
 
-    // public function get_car_by_id($car_id){
-    //     return $this->query_unique("SELECT * FROM cars WHERE id = :id", ["id" => $car_id]);
-    // }
+    public function get_car_by_id($car_id){
+        return $this->query_unique("SELECT * FROM cars WHERE id = :id", ["id" => $car_id]);
+    }
 
-    // public function delete_car_by_id($car_id) {
-    //     $this->execute("DELETE FROM cars WHERE id = :id", ["id" => $car_id]);
-    // }
+    public function delete_car_by_id($car_id) {
+        $this->delete('cars');
+    }
 
-
-    
-
-    // function getCarsWithManualTransmission(){
-    // return $this->query("SELECT *
-    // FROM cars
-    // WHERE transmission = 'manual'");
-    // }   
+    public function update_car($car_id){
+        $this->update($car_id, 'cars');
+    }
 }
