@@ -78,14 +78,14 @@ class BaseDao{
         return $entity;
     }
 
-//     protected function execute($query, $params){
-//     $prepared_statement = $this->connection->prepare($query);
-//     if ($params) {
-//       foreach ($params as $key => $param) {
-//         $prepared_statement->bindValue($key, $param);
-//       }
-//     }
-//     $prepared_statement->execute();
-//     return $prepared_statement;
-//   }
+    protected function execute($query, $params){
+         $prepared_statement = $this->connection->prepare($query);
+        if ($params) {
+            foreach ($params as $key => $param) {
+                $prepared_statement->bindValue($key, $param);
+            }
+        }
+        $prepared_statement->execute();
+        return $prepared_statement;
+    }
 }

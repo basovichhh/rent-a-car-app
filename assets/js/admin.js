@@ -1,23 +1,22 @@
 $(document).ready(function () {
-
-    function addCar(data) {
+  function addCar(data) {
       $.ajax({
-        url: "http://localhost/rent-a-car-app/backend/api/cars",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function (response) {
-          console.log(response);
-          alert("Car added successfully!");
-        },
-        error: function (error) {
-          console.error('Failed to add car:', error.statusText);
-          alert("Failed to add car. Please try again later.");
-        }
+          url: "http://localhost/rent-a-car-app/backend/api/cars",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(data),
+          success: function (response) {
+              console.log(response);
+              alert("Car added successfully!");
+          },
+          error: function (error) {
+              console.error('Failed to add car:', error.statusText);
+              alert("Failed to add car. Please try again later.");
+          }
       });
-    }
-  
-    $('#add-car').click(function() {
+  }
+
+  $('#add-car').click(function () {
       var name = $('#name').val();
       var manufacturer = $('#manufacturer').val();
       var price = $('#price').val();
@@ -27,23 +26,24 @@ $(document).ready(function () {
       var seats = $('#seats').val();
       var luggage = $('#luggage').val();
       var fuel = $('#fuel').val();
-  
-      var carData = {
-        manufacturer: manufacturer,
-        name: name,
-        price: price,
-        description: description,
-        mileage: mileage,
-        transmission: transmission,
-        seats: seats,
-        luggage: luggage,
-        fuel: fuel
-      };
-  
-      addCar(carData);
-    });
 
-    function deleteCar(carId) {
+      var carData = {
+          manufacturer: manufacturer,
+          name: name,
+          price: price,
+          description: description,
+          mileage: mileage,
+          transmission: transmission,
+          seats: seats,
+          luggage: luggage,
+          fuel: fuel
+      };
+
+      addCar(carData);
+      $('#add-car').modal('hide');
+  });
+
+  function deleteCar(carId) {
       $.ajax({
           url: "http://localhost/rent-a-car-app/backend/api/cars/" + carId,
           type: "DELETE",
@@ -58,18 +58,12 @@ $(document).ready(function () {
       });
   }
 
+  $('#deleteCarModal').on('click', '.btn-danger', function () {
+      var carId = $('#carIdToDelete').val();
+      deleteCar(carId);
+      $('#deleteCarModal').modal('hide');
+  });
 
-  $(document).ready(function () {
-    // Bind click event to the "Delete" button inside the modal
-    $('#deleteCarModal').on('click', '.btn-danger', function () {
-        var carId = $('#carIdToDelete').val(); // Get the car ID from the input field
-        deleteCar(carId); // Call deleteCar() function with the entered car ID
-        $('#deleteCarModal').modal('hide'); // Hide the modal after deletion
-    });
-});
-
-$(document).ready(function () {
-  // Function to update car by ID
   function updateCar(carId, updatedCarData) {
       $.ajax({
           url: "http://localhost/rent-a-car-app/backend/api/cars/" + carId,
@@ -87,9 +81,8 @@ $(document).ready(function () {
       });
   }
 
-  // Bind click event to the "Save changes" button in the modal
   $('#updateCarModal').on('click', '.btn-primary', function () {
-      var carId = $('#updateCarId').val(); // Get the car ID from the input field
+      var carId = $('#updateCarId').val();
       var data = {
           name: $('#name').val(),
           manufacturer: $('#manufacturer').val(),
@@ -101,11 +94,101 @@ $(document).ready(function () {
           luggage: $('#luggage').val(),
           fuel: $('#fuel').val()
       };
-      updateCar(carId, data); // Call updateCar() function with the entered car ID and updated data
-      $('#updateCarModal').modal('hide'); // Hide the modal after updating
+      updateCar(carId, data);
+      $('#updateCarModal').modal('hide');
   });
-});
+
+  function addLocation(data) {
+      $.ajax({
+          url: "http://localhost/rent-a-car-app/backend/api/locations",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(data),
+          success: function (response) {
+              console.log(response);
+              alert("Location added successfully!");
+          },
+          error: function (error) {
+              console.error('Failed to add location:', error.statusText);
+              alert("Failed to add location. Please try again later.");
+          }
+      });
+  }
+
+  $('#addLocationModal').on('click', '#add-location', function () {
+      console.log("Add Location button clicked!");
+      var name_point = $('#name_point').val();
+      var address = $('#address').val();
+      var town = $('#town').val();
+      var email = $('#email').val();
+      var phone = $('#phone').val();
+      var date_available = $('#date_available').val();
+
+      var locationData = {
+          name_point: name_point,
+          address: address,
+          town: town,
+          email: email,
+          phone: phone,
+          date_available: date_available
+      };
+
+      addLocation(locationData);
+      $('#addLocationModal').modal('hide');
+  });
+
+  function deleteLocation(locationId) {
+    $.ajax({
+        url: "http://localhost/rent-a-car-app/backend/api/locations/" + locationId,
+        type: "DELETE",
+        success: function (response) {
+            console.log(response);
+            alert("Location deleted successfully!");
+        },
+        error: function (error) {
+            console.error('Failed to delete location:', error.statusText);
+            alert("Failed to delete location. Please try again later.");
+        }
+    });
+}
+
+    $('#deleteLocationModal').on('click', '.btn-danger', function () {
+    var locationId = $('#locationIdToDelete').val();
+    deleteLocation(locationId);
+    $('#deleteLocationModal').modal('hide');
+    });
+
+    function updateLocation(locationId, updatedLocationData) {
+        $.ajax({
+            url: "http://localhost/rent-a-car-app/backend/api/locations/" + locationId,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(updatedLocationData),
+            success: function (response) {
+                console.log(response);
+                alert("Location updated successfully!");
+            },
+            error: function (error) {
+                console.error('Failed to update location:', error.statusText);
+                alert("Failed to update location. Please try again later.");
+            }
+        });
+    }
+
+    $('#updateLocationModal').on('click', '.btn-primary', function () {
+        var locationId = $('#updateLocationId').val();
+        var data = {
+            name_point: $('#name_point').val(),
+            address: $('#address').val(),
+            town: $('#town').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+            date_available: $('#date_available').val()
+        };
+        updateLocation(locationId, data);
+        $('#updateLocationModal').modal('hide');
+    });
 
 
+
 });
-  
