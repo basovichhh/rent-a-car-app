@@ -1,6 +1,6 @@
 <?php
 
-Flight::route('GET /locations', function () {
+Flight::route('GET /api/locations', function () {
     Flight::json(Flight::locationService()->get_all());
 });
 
@@ -10,7 +10,7 @@ Flight::route('POST /api/locations', function () {
     Flight::json(Flight::locationService()->add($data));
 });
 
-Flight::route('GET /locations/bookings/@location_id', function ($location_id) {
+Flight::route('GET /api/locations/bookings/@location_id', function ($location_id) {
     Flight::json(Flight::locationService()->getNumberOfBookingsPerLocation($location_id));
 });
 

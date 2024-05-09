@@ -2,16 +2,36 @@
 require_once __DIR__ . '/BaseDao.class.php';
 
 
-class BookingDao extends BaseDao
-{
-    public function __construct()
-    {
+class BookingDao extends BaseDao{
+
+    public function __construct(){
         parent::__construct("bookings");  
-        //name of the table in DB is written with lower-case letter, so I wrote it like that in every class
     }
 
+    public function get_all_bookings(){
+        try {
+            $query = "SELECT * FROM bookings";
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            throw new \Exception("Error retrieving bookings: " . $e->getMessage());
+        }
+    }
 
-    // custom function, which is not present in BaseDao, which will show all paid bookings per a location
+    public function add_booking($booking_data) {
+        try {
+            $query = "INSERT INTO bookings (user_id, car_id, location_id, date_of_booking, date_of_payment, paid) VALUES (:user_id, :car_id, :location_id, :date_of_booking, :date_of_payment, :paid)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute($booking_data);
+            return $this->connection->lastInsertId();
+        } catch (\Exception $e) {
+            throw new \Exception("Error adding booking: " . $e->getMessage());
+        }
+    }
+    
+
+
     function getPaidBookingsPerLocation($location_id)
     {
         return $this->query("SELECT *
@@ -19,7 +39,6 @@ class BookingDao extends BaseDao
         WHERE paid = 1 AND location_id = :location_id", [ "location_id" => $location_id]);
     } 
 
-    //custom function, which will show all unpaid bookings per a location
     function getUnpaidBookingsPerLocation($location_id)
     {
         return $this->query("SELECT *
