@@ -8,17 +8,16 @@ class CarService extends BaseService{
     
     public function __construct(){
         parent::__construct(new CarDao);
+        $this->car_dao = new CarDao();
     }
 
     public function getById($car_id) {
-        return $this->dao->get_car_by_id($car_id);
+        return $this->car_dao->get_car_by_id($car_id);
     }
 
-    public function edit_car($car) {
-        $id = $car['id'];
-        unset($car['id']);
+    public function update_car($car, $car_id) {
 
-        $this->car_dao->edit_car($id, $car);
+        $this->car_dao->update_car($car_id, $car);
     }
     
 }

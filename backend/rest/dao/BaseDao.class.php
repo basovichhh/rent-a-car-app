@@ -16,14 +16,13 @@ class BaseDao{
         }
     }
 
-    function query($query, $params = []) {
+    protected function query($query, $params = []) {
         $stmt = $this->connection->prepare($query);
         $stmt->execute($params);
         return $stmt;
     }
 
-    protected function query_unique($query, $params)
-    {
+    protected function query_unique($query, $params){
         $results = $this->query($query, $params);
         return reset($results);
     }
@@ -79,13 +78,25 @@ class BaseDao{
     }
 
     protected function execute($query, $params){
-         $prepared_statement = $this->connection->prepare($query);
-        if ($params) {
-            foreach ($params as $key => $param) {
-                $prepared_statement->bindValue($key, $param);
+        try {
+            $prepared_statement = $this->connection->prepare($query);
+            
+            if ($params) {
+                foreach ($params as $key => $param) {
+                    $prepared_statement->bindValue($key, $param);
+                }
             }
+            
+            $prepared_statement->execute();
+            
+            // Optionally, you can return the number of affected rows
+            return $prepared_statement->rowCount();
+        } catch (PDOException $e) {
+            // Handle the exception (e.g., log or display the error message)
+            echo "Error: " . $e->getMessage();
+            // You might want to throw the exception again to propagate it to the caller
+            throw $e;
         }
-        $prepared_statement->execute();
-        return $prepared_statement;
     }
+    
 }

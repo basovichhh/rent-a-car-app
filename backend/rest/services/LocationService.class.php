@@ -8,19 +8,18 @@ class LocationService extends BaseService
     public $location_dao;
 
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct(new LocationDao);
+        $this->location_dao = new CarDao();
+
     }
 
     public function getById($location_id) {
         return $this->dao->get_location_by_id($location_id);
     }
 
-    public function edit_location($location) {
-        $id = $location['id'];
-        unset($location['id']);
+    public function update_location($location, $location_id) {
 
-        $this->location_dao->edit_location($id, $location);
+        $this->location_dao->update_car($location_id, $location);
     }
 }

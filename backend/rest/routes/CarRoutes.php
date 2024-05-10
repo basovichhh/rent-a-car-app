@@ -29,7 +29,6 @@ Flight::route('GET /api/cars', function () {
      *          description="Car data payload",
      *          @OA\JsonContent(
      *              required={"name","manufacturer","email"},
-     *              @OA\Property(property="id", type="string", example="1", description="Car ID"),
      *              @OA\Property(property="name", type="string", example="Some car name", description="Car model name"),
      *              @OA\Property(property="manufacturer", type="string", example="Some manufacturer name", description="Car manufacturer name"),
      *              @OA\Property(property="fuel", type="string", example="Diesel", description="Car fuel type"),
@@ -44,17 +43,47 @@ Flight::route('POST /api/cars', function () {
     Flight::json(Flight::carService()->add($data));
 });
 
+ /**
+     * @OA\Delete(
+     *      path="/api/cars/{car_id}",
+     *      tags={"cars"},
+     *      summary="Delete car by id",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Deleted car data or 500 status code exception otherwise"
+     *      ),
+     *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="car_id", example="1", description="Car ID")
+     * )
+     */
 
 Flight::route('DELETE /api/cars/@car_id', function ($car_id) {
     Flight::carService()->delete($car_id);
 });
 
-Flight::route('GET /api/cars/@car_id', function ($car_id) {
-    Flight::json(Flight::carService()->get_car_by_id($car_id));
-});
+   /**
+     * @OA\Get(
+     *      path="/api/cars/{car_id}",
+     *      tags={"cars"},
+     *      summary="Get car by id",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Car data, or false if car does not exist"
+     *      ),
+     *      @OA\Parameter(@OA\Schema(type="number"), in="query", name="car_id", example="1", description="Car ID")
+     * )
+     */
 
-Flight::route("PUT /api/cars/@car_id", function($car_id){
-    $data = Flight::request()->data->getData();
-    Flight::carService()->update($car_id, $data);
+Flight::route('GET /api/cars/@car_id', function ($car_id) {
     Flight::json(Flight::carService()->getById($car_id));
 });
+
+Flight::route("PUT /api/cars/@carId", function($carId){
+    $car = Flight::request()->data->getData();
+    print_r($car);
+
+    // Flight::json(['message' => "Student edit successfully",
+    //               'data' => Flight::carService()->update_car($car, $carId)
+    //              ]);
+
+
+ });

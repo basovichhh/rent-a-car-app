@@ -65,6 +65,7 @@ $(document).ready(function () {
   });
 
   function updateCar(carId, updatedCarData) {
+    console.log(updatedCarData);
       $.ajax({
           url: "http://localhost/rent-a-car-app/backend/api/cars/" + carId,
           type: "PUT",
@@ -94,6 +95,7 @@ $(document).ready(function () {
           luggage: $('#luggage').val(),
           fuel: $('#fuel').val()
       };
+      console.log(data);
       updateCar(carId, data);
       $('#updateCarModal').modal('hide');
   });
@@ -297,6 +299,7 @@ $('.payment-button').click(function () {
         date_of_payment: null, // Payment date is initially null
         paid: 0 // Payment status is initially false
         // Add more fields if needed
+        
     };
 
     // Make an AJAX POST request to add the booking
