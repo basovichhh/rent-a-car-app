@@ -23,9 +23,23 @@ class BaseDao{
     }
 
     protected function query_unique($query, $params){
-        $results = $this->query($query, $params);
-        return reset($results);
+        $statement = $this->query($query, $params);
+    
+        if ($statement === false || $statement->rowCount() === 0) {
+            // Handle case where query fails or returns no results
+            return null; // Or throw an exception, depending on your requirements
+        }
+    
+        // Fetch the first row as an associative array
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        // Free the statement resources
+        $statement->closeCursor();
+    
+        return $result;
     }
+    
+    
 
     function get_all() {
         $stmt = $this->query("SELECT * FROM " . $this->table_name);
@@ -36,8 +50,8 @@ class BaseDao{
         return $this->query_unique("SELECT * FROM " . $this->table_name . " WHERE id = :id", ["id" => $id]);
     }
 
-    public function add($entity) {
-        $query = "INSERT INTO " . $this->table_name . " (" ;
+    public function add($table_name, $entity) {
+        $query = "INSERT INTO {$table_name} (" ;
         foreach ($entity as $column => $value) {
             $query .= $column . ", ";
         }
@@ -77,26 +91,15 @@ class BaseDao{
         return $entity;
     }
 
-    protected function execute($query, $params){
-        try {
-            $prepared_statement = $this->connection->prepare($query);
-            
-            if ($params) {
-                foreach ($params as $key => $param) {
-                    $prepared_statement->bindValue($key, $param);
-                }
-            }
-            
-            $prepared_statement->execute();
-            
-            // Optionally, you can return the number of affected rows
-            return $prepared_statement->rowCount();
-        } catch (PDOException $e) {
-            // Handle the exception (e.g., log or display the error message)
-            echo "Error: " . $e->getMessage();
-            // You might want to throw the exception again to propagate it to the caller
-            throw $e;
+    protected function execute($query, $params) {
+        $prepared_statement = $this->connection->prepare($query);
+        if ($params) {
+        foreach ($params as $key => $param) {
+            $prepared_statement->bindValue($key, $param);
         }
+        }
+        $prepared_statement->execute();
+        return $prepared_statement;
     }
     
 }

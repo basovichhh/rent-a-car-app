@@ -23,17 +23,24 @@ class LocationDao extends BaseDao
     }
 
     public function update_location($id, $location) {
-        $query = "UPDATE locations SET name_point = :name_point, address = :address, town = :town, email = :email, phone = :phone, date_available = :date_available
-                  WHERE id = :id";
-        $this->execute($query, [
-            'name_point' => $location['name_point'],
-            'address' => $location['address'],
-            'town' => $location['town'],
-            'email' => $location['email'],
-            'phone' => $location['phone'],
-            'date_available' => $location['date_available'],
-            'id' => $id
-        ]);
+        try {
+            $query = "UPDATE locations SET name_point = :name_point, address = :address, town = :town, email = :email, phone = :phone, date_available = :date_available
+                      WHERE id = :id";
+            $this->execute($query, [
+                'name_point' => $location['name_point'],
+                'address' => $location['address'],
+                'town' => $location['town'],
+                'email' => $location['email'],
+                'phone' => $location['phone'],
+                'date_available' => $location['date_available'],
+                'id' => $id
+            ]);
+        } catch (Exception $e) {
+            // Log error
+            error_log('Error updating location: ' . $e->getMessage());
+            throw $e; // Rethrow the exception for higher-level handling
+        }
     }
+    
 }
 

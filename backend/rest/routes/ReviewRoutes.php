@@ -17,24 +17,25 @@ Flight::route('GET /api/reviews', function () {
 });
 
 /**
-     * @OA\Post(
-     *      path="/api/reviews",
-     *      tags={"reviews"},
-     *      summary="Add reviews data to the database",
-     *      @OA\Response(
-     *           response=200,
-     *           description="Review data, or exception if review is not added properly"
-     *      ),
-     *      @OA\RequestBody(
-     *          description="Review data payload",
-     *          @OA\JsonContent(
-     *              required={"booking_id","review_score"},
-     *              @OA\Property(property="booking_id", type="string", example="Some booking_id", description="Booking id"),
-     *              @OA\Property(property="review_score", type="string", example="Some review score", description="Review score")        
-     *          )
-     *      )
-     * )
-     */
+ * @OA\Post(
+ *      path="/api/reviews",
+ *      tags={"reviews"},
+ *      summary="Add reviews data to the database",
+ *      @OA\Response(
+ *           response=200,
+ *           description="Review data, or exception if review is not added properly"
+ *      ),
+ *      @OA\RequestBody(
+ *          description="Review data payload",
+ *          @OA\JsonContent(
+ *              required={"booking_id","review_score"},
+ *              @OA\Property(property="booking_id", type="integer", example=1, description="Booking id"),
+ *              @OA\Property(property="review_score", type="integer", example=5, description="Review score")        
+ *          )
+ *      )
+ * )
+ */
+
 
 Flight::route('POST /api/reviews', function () {
     $data = Flight::request()->data->getData();
@@ -64,7 +65,7 @@ Flight::route('DELETE /api/reviews/@review_id', function ($review_id) {
 /**
      * @OA\Get(
      *      path="/api/reviews/{review_id}",
-     *      tags={"bookings"},
+     *      tags={"reviews"},
      *      summary="Get review by id",
      *      @OA\Response(
      *           response=200,

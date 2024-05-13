@@ -83,8 +83,25 @@ Flight::route('DELETE /api/locations/@location_id', function ($location_id) {
 });
 
 
+
 Flight::route("PUT /api/locations/@location_id", function($location_id){
     $data = Flight::request()->data->getData();
-    Flight::locationService()->update($location_id, $data);
-    Flight::json(Flight::locationService()->getById($location_id));
+    $data['id'] = $location_id;
+
+    
+    try {
+        Flight::locationService()->update_location($data); // Only pass data
+        $updatedLocation = Flight::locationService()->getById($location_id);
+        Flight::json($updatedLocation);
+    } catch (Exception $e) {
+        // Handle update error
+        Flight::halt(500, 'Failed to update location: ' . $e->getMessage());
+    }
 });
+
+
+// Flight::route("PUT /api/locations/@location_id", function($location_id){
+//     $data = Flight::request()->data->getData();
+//     Flight::locationService()->update_($location_id, $data);
+//     Flight::json(Flight::locationService()->getById($location_id));
+// });

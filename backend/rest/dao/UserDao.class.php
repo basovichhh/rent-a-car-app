@@ -8,6 +8,10 @@ class UserDao extends BaseDao{
         parent::__construct("users");
     }
 
+    public function add_user($user){
+        return $this->add('users', $user);
+    }
+
     public function get_all_users(){
         try {
             $query = "SELECT * FROM users";
@@ -21,6 +25,17 @@ class UserDao extends BaseDao{
 
     public function delete_user_by_id() {
         $this->delete('users');
+    }
+
+    public function update_user($id, $user) {
+        $query = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email
+                  WHERE id = :id";
+        $this->execute($query, [
+            'first_name' => $user['first_name'],
+            'last_name' => $user['last_name'],
+            'email' => $user['email'],
+            'id' => $id
+        ]);
     }
 
     

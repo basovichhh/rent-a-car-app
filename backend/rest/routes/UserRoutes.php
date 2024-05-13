@@ -52,7 +52,7 @@ Flight::route('GET /api/users/@first_name/@last_name', function ($first_name, $l
      *              required={"email","pwd","first_name", "last_name"},
      *              @OA\Property(property="email", type="string", example="example@user.com", description="User email"),
      *              @OA\Property(property="pwd", type="string", example="Some pwd of user", description="User pwd"),
-     *              @OA\Property(property="first_nme", type="string", example="Some name", description="User name"),
+     *              @OA\Property(property="first_name", type="string", example="Some name", description="User name"),
      *              @OA\Property(property="last_name", type="string", example="Some last name", description="User last name")
      *          )
      *      )
@@ -62,7 +62,7 @@ Flight::route('GET /api/users/@first_name/@last_name', function ($first_name, $l
 
 Flight::route('POST /api/users', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::userService()->add($data));
+    Flight::json(Flight::userService()->add_user($data));
 });
 
  /**

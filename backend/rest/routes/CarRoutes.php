@@ -1,4 +1,8 @@
 <?php
+
+require_once __DIR__ . '/../services/CarService.class.php';
+
+Flight::set('car_service', new CarService());
 //get information about all cars
 
 /**
@@ -62,26 +66,28 @@ Flight::route('DELETE /api/cars/@car_id', function ($car_id) {
 
    /**
      * @OA\Get(
-     *      path="/api/cars/{car_id}",
+     *      path="/cars/{car_id}",
      *      tags={"cars"},
      *      summary="Get car by id",
      *      @OA\Response(
      *           response=200,
      *           description="Car data, or false if car does not exist"
      *      ),
-     *      @OA\Parameter(@OA\Schema(type="number"), in="query", name="car_id", example="1", description="Car ID")
+     *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="car_id", example="1", description="Car ID")
      * )
      */
 
-Flight::route('GET /api/cars/@car_id', function ($car_id) {
-    Flight::json(Flight::carService()->getById($car_id));
+Flight::route('GET /@car_id', function ($car_id) {
+    $car = Flight::get('car_service')->get_car_by_id($car_id);
+    Flight::json($car, 200);
 });
+    
 
 Flight::route("PUT /api/cars/@carId", function($carId){
     $car = Flight::request()->data->getData();
     print_r($car);
 
-    // Flight::json(['message' => "Student edit successfully",
+    // Flight::json(['message' => "Car edited successfully",
     //               'data' => Flight::carService()->update_car($car, $carId)
     //              ]);
 
