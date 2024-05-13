@@ -2,6 +2,32 @@ var users = [];
 var trips = [];
 var idCounter = 1;
 
+serializeForm = (form) => {
+  let jsonResult = {};
+  $.each($(form).serializeArray(), function () {
+    jsonResult[this.name] = this.value;
+  });
+  return jsonResult;
+};
+
+blockUi = (element) => {
+  $(element).block({
+    message: '<div class="spinner-border text-primary" role="status"></div>',
+    css: {
+      backgroundColor: "transparent",
+      border: "0",
+    },
+    overlayCSS: {
+      backgroundColor: "#000",
+      opacity: 0.25,
+    },
+  });
+};
+
+unblockUi = (element) => {
+  $(element).unblock({});
+};
+
 
 
 $("#register-form").validate({
@@ -361,10 +387,3 @@ $(document).ready(function () {
     $(element).unblock({});
   };
   
-  serializeForm = (form) => {
-    let jsonResult = {};
-    $.each($(form).serializeArray(), function () {
-      jsonResult[this.name] = this.value;
-    });
-    return jsonResult;
-  };

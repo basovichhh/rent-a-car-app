@@ -18,6 +18,7 @@
     <button type="button" class="button" data-toggle="modal" data-target="#deleteLocationModal">Delete Location</button>
     <button type="button" class="button" data-toggle="modal" data-target="#updateLocationModal">Update Location</button>
     <button type="button" class="button" data-toggle="modal" data-target="#getAllUsersModal">Get All Users</button>
+    <button type="button" class="button" data-toggle="modal" data-target="#addUserModal">Add New User</button>
     <button type="button" class="button" data-toggle="modal" data-target="#deleteUserModal">Delete User</button>
     <button type="button" class="button" data-toggle="modal" data-target="#getAllBookingsModal">Get All Bookings</button>
 
@@ -179,7 +180,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="addCarForm">
+        <form id="addLocationForm">
           <div class="form-group">
             <label for="name_point">Name point</label>
             <input type="text" class="form-control" id="name_point" name="name_point">
@@ -302,6 +303,43 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
       </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addUserForm">
+          <div class="form-group">
+            <label for="first_name">First name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="text" class="form-control" id="email" name="email">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" class="form-control" id="pwd" name="pwd">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="add-user">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
 
