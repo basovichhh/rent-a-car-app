@@ -190,14 +190,12 @@
     app.route({view: 'jeep', load: 'car-details-jeep.html'});
     app.route({view: 'range-evoque', load: 'car-details-range-evoque.html'});
 
-		app.run();
+		if (Utils.get_from_localstorage("user")) {
+      app.run();
+    } else {
+      window.location = "login";
+    }
 	});
-
-  if (Utils.get_from_localstorage("user")) {
-    Utils.init_spapp();
-  } else {
-    window.location = "login";
-  }
 		 
    </script>
   

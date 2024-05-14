@@ -74,32 +74,49 @@ $("#register-form").validate({
   },
 });
 
+
+// Validate and handle the login form submission
 $("#login-form").validate({
-    rules: {
-      username: {
-        required: true,
-        minlength: 5,
-      },
-      password: {
-        required: true,
-        minlength: 5,
-      },
+  rules: {
+    username: {
+      required: true,
+      minlength: 5,
     },
-    messages: {
-      username: {
-        required: "You have to fill it in!",
-        minlength: "Too short buddy!",
+    password: {
+      required: true,
+      minlength: 5,
+    },
+  },
+  messages: {
+    username: {
+      required: "You have to fill it in!",
+      minlength: "Too short buddy!",
+    },
+  },
+  submitHandler: function (form, event) {
+    event.preventDefault();
+    blockUi("#login-form");
+
+    let data = serializeForm(form);
+    console.log("Login data:", data);
+
+    RestClient.post(
+      'auth/login',
+      data,
+      function (response) {
+        unblockUi("#login-form");
+        Utils.set_to_localstorage("user", response);
+        console.log('Login successful, navigating to #pocetna');
+        window.location.hash = "#pocetna";1
       },
-    },
-    submitHandler: function (form, event) {
-      event.preventDefault();
-      blockUi("#login-form");
-      let data = serializeForm(form);
-      console.log("Login data:", data);
-      unblockUi("#login-form");
-      window.location.href = "#home";
-    },
-  });
+      function (error) {
+        unblockUi("#login-form");
+        toastr.error(error.responseText);
+      }
+    );
+  },
+});
+
 
   $("#contact-form").validate({
     rules: {

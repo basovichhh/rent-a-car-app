@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="field">
-            <button type="submit" class="login-button" href="index.html">Login</button>
+            <button type="submit" class="login-button" href="#pocetna">Login</button>
         </div>
         <div class="signup-link">
             <a href="http://localhost/rent-a-car-app/pages/register.html">Need an account? Sign Up!</a>
@@ -61,12 +61,22 @@
     window.location = "../";
   }
 
-  FormValidation.validate("#login-form", {}, function(data) {
-    Utils.block_ui("#login-form-container");
+  // Function to handle form submission
+function handleFormSubmit(event) {
+  event.preventDefault(); // Prevent the default form submission
 
+  // Get the form data
+  var formData = $("#login-form").serialize();
+
+  // Perform your custom validation here
+  var isValid = true; // Replace with actual validation logic
+
+  if (isValid) {
+    Utils.block_ui("#login-form-container");
+    console.log("amir");
     RestClient.post(
       'auth/login',
-      data,
+      formData,
       function (response) {
         Utils.unblock_ui("#login-form-container");
         Utils.set_to_localstorage("user", response);
@@ -76,8 +86,18 @@
         Utils.unblock_ui("#login-form-container");
         toastr.error(error.responseText);
       }
-    )
-  });
+    );
+  } else {
+    // Handle validation errors
+    toastr.error("Validation failed");
+  }
+}
+
+// Attach the submit event handler to the form
+$(document).ready(function () {
+  $("#login-form").on("submit", handleFormSubmit);
+});
+
 </script>
 
 </body>
