@@ -25,15 +25,12 @@ Flight::route('GET /api/bookings', function () {
      *           description="Booking data, or exception if booking is not added properly"
      *      ),
      *      @OA\RequestBody(
-     *          description="Location data payload",
+     *          description="Booking data payload",
      *          @OA\JsonContent(
-     *              required={"name_point","address","town", "email", "phone", "date_available"},
-     *              @OA\Property(property="name_point", type="string", example="Some location name", description="Location name"),
-     *              @OA\Property(property="address", type="string", example="Some address of location", description="Location address"),
-     *              @OA\Property(property="town", type="string", example="Some town name", description="Town name"),
-     *              @OA\Property(property="email", type="string", example="example@organization.com", description="Email of organization"),
-     *              @OA\Property(property="phone", type="string", example="+38761588203", description="Phone of organization"),
-     *              @OA\Property(property="date_available", type="string", example="2023-05-10", description="Availability date"),
+     *              required={"date_of_booking","date_of_payment","paid"},
+     *              @OA\Property(property="date_of_booking", type="string", example="Some date", description="Booking date"),
+     *              @OA\Property(property="date_of_payment", type="string", example="Some payment date", description="Payment date"),
+     *              @OA\Property(property="paid", type="string", example="Paid value", description="Paid value"),
      *          )
      *      )
      * )
@@ -42,7 +39,7 @@ Flight::route('GET /api/bookings', function () {
 
 Flight::route('POST /api/bookings', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::bookingService()->add($data));
+    Flight::json(Flight::bookingService()->add('bookings', $data));
 });
 
 

@@ -11,8 +11,8 @@ class CarDao extends BaseDao
         parent::__construct('cars');  
     }
 
-    public function add_car() {
-        return $this->add('cars');
+    public function add_car($car) {
+        return $this->add('cars', $car);
     }
 
     public function get_car_by_id($car_id){

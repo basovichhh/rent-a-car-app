@@ -17,8 +17,8 @@ class BaseService {
         return $this->dao->get_by_id($id);
     }
 
-    public function add($entity){
-        return $this->dao->add($entity);
+    public function add($table_name, $entity){
+        return $this->dao->add($table_name, $entity);
     }
 
     public function update($entity, $id){

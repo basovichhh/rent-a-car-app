@@ -10,8 +10,8 @@ class LocationDao extends BaseDao
     }
 
 
-    public function add_location() {
-        return $this->add('locations');
+    public function add_location($location) {
+        return $this->add('locations', $location);
     }
 
     public function delete_location_by_id() {

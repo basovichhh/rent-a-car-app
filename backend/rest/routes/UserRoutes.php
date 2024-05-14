@@ -30,7 +30,7 @@ Flight::route('GET /api/users', function () {
      */
 
 Flight::route('GET /api/users/@user_id', function ($user_id) {
-    Flight::json(Flight::userService()->get_by_id($user_id));
+    Flight::json(Flight::userService()->get_user_by_id($user_id));
 });
 
 Flight::route('GET /api/users/@first_name/@last_name', function ($first_name, $last_name) {

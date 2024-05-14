@@ -20,7 +20,7 @@ class UserService extends BaseService{
         return $this->user_dao->get_all_users();
     }
 
-    public function getById($userId) {
+    public function get_user_By_id($userId) {
         return $this->dao->get_user_By_id($userId);
     }
 

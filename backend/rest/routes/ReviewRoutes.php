@@ -39,7 +39,7 @@ Flight::route('GET /api/reviews', function () {
 
 Flight::route('POST /api/reviews', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::reviewService()->add($data));
+    Flight::json(Flight::reviewService()->add('reviews', $data));
 });
 
  /**

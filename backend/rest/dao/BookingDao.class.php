@@ -19,19 +19,10 @@ class BookingDao extends BaseDao{
         }
     }
 
-    public function add_booking($booking_data) {
-        try {
-            $query = "INSERT INTO bookings (user_id, car_id, location_id, date_of_booking, date_of_payment, paid) VALUES (:user_id, :car_id, :location_id, :date_of_booking, :date_of_payment, :paid)";
-            $stmt = $this->connection->prepare($query);
-            $stmt->execute($booking_data);
-            return $this->connection->lastInsertId();
-        } catch (\Exception $e) {
-            throw new \Exception("Error adding booking: " . $e->getMessage());
-        }
+    public function add_booking($booking) {
+        return $this->add('bookings', $booking);
     }
     
-
-
     function getPaidBookingsPerLocation($location_id)
     {
         return $this->query("SELECT *

@@ -44,7 +44,7 @@ Flight::route('GET /api/cars', function () {
 
 Flight::route('POST /api/cars', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::carService()->add($data));
+    Flight::json(Flight::carService()->add('cars', $data));
 });
 
  /**

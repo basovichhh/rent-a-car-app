@@ -43,7 +43,7 @@ Flight::route('GET /api/locations', function () {
 
 Flight::route('POST /api/locations', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::locationService()->add($data));
+    Flight::json(Flight::locationService()->add('locations', $data));
 });
 
   /**
