@@ -12,3 +12,7 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_HOST', '127.0.0.1'); // localhost
 
+// JWT Secret 
+
+define('JWT_Secret', 'd;Tef?mM5V_n*L(-{*L@.0&21rxN}C');
+

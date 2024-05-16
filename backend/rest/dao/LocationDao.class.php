@@ -10,15 +10,37 @@ class LocationDao extends BaseDao
     }
 
 
-    // This is custom function, which is not present in BaseDao, and it will return number of bookings per locations
-    // query_unique -> returns only 1 result if multiple are present
-    //For some reason, it just returns false. I don't know why, but perhaps ALIASES are problem.
-     function getNumberOfBookingsPerLocation($location_id)
-    {
-        return $this->query_unique("SELECT COUNT(b.id) AS number_of_bookings_per_location
-        FROM bookings b
-        JOIN locations l ON b.location_id = l.id
-        WHERE l.id = :l.id", ["id" => $location_id]); 
+    public function add_location($location) {
+        return $this->add('locations', $location);
     }
+
+    public function delete_location_by_id() {
+        $this->delete('locations');
+    }
+
+    public function get_location_by_id($location_id){
+        return $this->query_unique("SELECT * FROM locations WHERE id = :id", ["id" => $location_id]);
+    }
+
+    public function update_location($id, $location) {
+        try {
+            $query = "UPDATE locations SET name_point = :name_point, address = :address, town = :town, email = :email, phone = :phone, date_available = :date_available
+                      WHERE id = :id";
+            $this->execute($query, [
+                'name_point' => $location['name_point'],
+                'address' => $location['address'],
+                'town' => $location['town'],
+                'email' => $location['email'],
+                'phone' => $location['phone'],
+                'date_available' => $location['date_available'],
+                'id' => $id
+            ]);
+        } catch (Exception $e) {
+            // Log error
+            error_log('Error updating location: ' . $e->getMessage());
+            throw $e; // Rethrow the exception for higher-level handling
+        }
+    }
+    
 }
 

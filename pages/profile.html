@@ -19,14 +19,36 @@
                 <!-- Profile Picture -->
                 <img src="assets/images/person_4.jpg" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                 <!-- User Name -->
-                <h2 class="mt-3">Mujo Mujic</h2>
+                <h2 class="mt-3"></h2>
             </div>
             <div class="col-md-6 text-end">
                 <!-- Settings Icon -->
                 <a href="#edit-profile" class="btn btn-primary"><i class="fas fa-cog"></i>Edit Profile</a>
-                <a href="pages/login.html" class="btn btn-primary"><i class="fas fa-cog"></i>Log out</a>
+                <a href="http://localhost/rent-a-car-app/login/index.html" class="btn btn-primary" id="log-out"><i class="fas fa-cog"></i>Log out</a>
             </div>
         </div>
     </div>
+
+
+    <script>
+      function logout() {
+        window.localStorage.clear();
+        
+        window.location = "http://localhost/rent-a-car-app/login/index.html";
+      }
+    
+      document.getElementById("log-out").onclick = logout;
+    
+      var userData = JSON.parse(localStorage.getItem('user'));
+
+      // retrieve users credentials 
+      var firstName = userData.first_name;
+      var lastName = userData.last_name;
+      
+      var fullName = firstName + " " + lastName;
+      
+      $(".mt-3").text(fullName);
+    </script>
+    
   </body>
 </html>

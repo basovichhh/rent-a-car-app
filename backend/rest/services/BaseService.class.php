@@ -1,9 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../dao/CarDao.class.php';
 
 
-class CarService {
+class BaseService {
     protected $dao;
     public function __construct($dao){
         $this->dao = $dao;
@@ -18,8 +17,8 @@ class CarService {
         return $this->dao->get_by_id($id);
     }
 
-    public function add($entity){
-        return $this->dao->add($entity);
+    public function add($table_name, $entity){
+        return $this->dao->add($table_name, $entity);
     }
 
     public function update($entity, $id){

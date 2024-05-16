@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../config.php';
 
 class BaseDao{
     protected $connection;
@@ -16,11 +16,30 @@ class BaseDao{
         }
     }
 
-    function query($query, $params = []) {
+    protected function query($query, $params = []) {
         $stmt = $this->connection->prepare($query);
         $stmt->execute($params);
         return $stmt;
     }
+
+    protected function query_unique($query, $params){
+        $statement = $this->query($query, $params);
+    
+        if ($statement === false || $statement->rowCount() === 0) {
+            // Handle case where query fails or returns no results
+            return null; // Or throw an exception, depending on your requirements
+        }
+    
+        // Fetch the first row as an associative array
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        // Free the statement resources
+        $statement->closeCursor();
+    
+        return $result;
+    }
+    
+    
 
     function get_all() {
         $stmt = $this->query("SELECT * FROM " . $this->table_name);
@@ -28,12 +47,11 @@ class BaseDao{
     }
 
     function getById($id) {
-        $stmt = $this->query("SELECT * FROM " . $this->table_name . " WHERE id = :id", ["id" => $id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->query_unique("SELECT * FROM " . $this->table_name . " WHERE id = :id", ["id" => $id]);
     }
 
-    public function add($entity) {
-        $query = "INSERT INTO " . $this->table_name . " (" ;
+    public function add($table_name, $entity) {
+        $query = "INSERT INTO {$table_name} (" ;
         foreach ($entity as $column => $value) {
             $query .= $column . ", ";
         }
@@ -50,6 +68,8 @@ class BaseDao{
         $entity['id'] = $this->connection->lastInsertId();
         return $entity;
     }
+    
+    
 
     public function delete($id) {
         $stmt = $this->connection->prepare("DELETE FROM " . $this->table_name . " WHERE id=:id");
@@ -68,10 +88,18 @@ class BaseDao{
         $stmt = $this->connection->prepare($query);
         $entity['id'] = $id;
         $stmt->execute($entity);
+        return $entity;
     }
 
-    protected function query_unique($query, $params) {
-        $results = $this->query($query, $params);
-        return reset($results);
+    protected function execute($query, $params) {
+        $prepared_statement = $this->connection->prepare($query);
+        if ($params) {
+        foreach ($params as $key => $param) {
+            $prepared_statement->bindValue($key, $param);
+        }
+        }
+        $prepared_statement->execute();
+        return $prepared_statement;
     }
+    
 }

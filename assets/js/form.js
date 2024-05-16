@@ -2,6 +2,32 @@ var users = [];
 var trips = [];
 var idCounter = 1;
 
+serializeForm = (form) => {
+  let jsonResult = {};
+  $.each($(form).serializeArray(), function () {
+    jsonResult[this.name] = this.value;
+  });
+  return jsonResult;
+};
+
+blockUi = (element) => {
+  $(element).block({
+    message: '<div class="spinner-border text-primary" role="status"></div>',
+    css: {
+      backgroundColor: "transparent",
+      border: "0",
+    },
+    overlayCSS: {
+      backgroundColor: "#000",
+      opacity: 0.25,
+    },
+  });
+};
+
+unblockUi = (element) => {
+  $(element).unblock({});
+};
+
 
 
 $("#register-form").validate({
@@ -48,32 +74,49 @@ $("#register-form").validate({
   },
 });
 
+
+// Validate and handle the login form submission
 $("#login-form").validate({
-    rules: {
-      username: {
-        required: true,
-        minlength: 5,
-      },
-      password: {
-        required: true,
-        minlength: 5,
-      },
+  rules: {
+    username: {
+      required: true,
+      minlength: 5,
     },
-    messages: {
-      username: {
-        required: "You have to fill it in!",
-        minlength: "Too short buddy!",
+    password: {
+      required: true,
+      minlength: 5,
+    },
+  },
+  messages: {
+    username: {
+      required: "You have to fill it in!",
+      minlength: "Too short buddy!",
+    },
+  },
+  submitHandler: function (form, event) {
+    event.preventDefault();
+    blockUi("#login-form");
+
+    let data = serializeForm(form);
+    console.log("Login data:", data);
+
+    RestClient.post(
+      'auth/login',
+      data,
+      function (response) {
+        unblockUi("#login-form");
+        Utils.set_to_localstorage("user", response);
+        console.log('Login successful, navigating to #pocetna');
+        window.location.hash = "#pocetna";1
       },
-    },
-    submitHandler: function (form, event) {
-      event.preventDefault();
-      blockUi("#login-form");
-      let data = serializeForm(form);
-      console.log("Login data:", data);
-      unblockUi("#login-form");
-      window.location.href = "#home";
-    },
-  });
+      function (error) {
+        unblockUi("#login-form");
+        toastr.error(error.responseText);
+      }
+    );
+  },
+});
+
 
   $("#contact-form").validate({
     rules: {
@@ -286,7 +329,59 @@ $("#rent-form").validate({
 });
 
 
-
+$(document).ready(function () {
+  $("#payment-form").validate({
+      rules: {
+          full_name: {
+              required: true,
+              minlength: 5,
+          },
+          credit_card_number: {
+              required: true,
+              minlength: 16,
+          },
+          card_exp_date: {
+              required: true,
+              minlength: 5,
+          },
+          card_cvv: {
+              required: true,
+              minlength: 3,
+          },
+          card_zip_code: {
+              required: true,
+              minlength: 5,
+          },
+      },
+      messages: {
+          full_name: {
+              required: "Please enter your full name.",
+              minlength: "Full name must be at least 5 characters long.",
+          },
+          credit_card_number: {
+              required: "Please enter your credit card number.",
+              minlength: "Credit card number must be 16 digits long.",
+          },
+          card_exp_date: {
+              required: "Please enter the expiration date.",
+              minlength: "Please enter in the format MM/YY.",
+          },
+          card_cvv: {
+              required: "Please enter your CVV.",
+              minlength: "CVV must be 3 digits long.",
+          },
+          card_zip_code: {
+              required: "Please enter your zip code.",
+              minlength: "Zip code must be 5 digits long.",
+          },
+      },
+      submitHandler: function (form, event) {
+          event.preventDefault();
+          // Your form submission logic here
+          console.log("Form submitted successfully!");
+      },
+  });
+});
 
   
   
@@ -309,10 +404,3 @@ $("#rent-form").validate({
     $(element).unblock({});
   };
   
-  serializeForm = (form) => {
-    let jsonResult = {};
-    $.each($(form).serializeArray(), function () {
-      jsonResult[this.name] = this.value;
-    });
-    return jsonResult;
-  };

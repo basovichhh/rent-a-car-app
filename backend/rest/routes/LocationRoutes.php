@@ -1,44 +1,107 @@
 <?php
-//works
-//get all information about all locations
-Flight::route('GET /locations', function () {
+
+/**
+     * @OA\Get(
+     *      path="/api/locations",
+     *      tags={"locations"},
+     *      summary="Get all locations",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Array of all locations in the database"
+     *      )
+     * )
+     */
+
+Flight::route('GET /api/locations', function () {
     Flight::json(Flight::locationService()->get_all());
 });
 
-//works
-//add a new location
-Flight::route('POST /locations', function () {
+/**
+     * @OA\Post(
+     *      path="/api/locations",
+     *      tags={"locations"},
+     *      summary="Add location data to the database",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Location data, or exception if location is not added properly"
+     *      ),
+     *      @OA\RequestBody(
+     *          description="Location data payload",
+     *          @OA\JsonContent(
+     *              required={"name_point","address","town", "email", "phone", "date_available"},
+     *              @OA\Property(property="name_point", type="string", example="Some location name", description="Location name"),
+     *              @OA\Property(property="address", type="string", example="Some address of location", description="Location address"),
+     *              @OA\Property(property="town", type="string", example="Some town name", description="Town name"),
+     *              @OA\Property(property="email", type="string", example="example@organization.com", description="Email of organization"),
+     *              @OA\Property(property="phone", type="string", example="+38761588203", description="Phone of organization"),
+     *              @OA\Property(property="date_available", type="string", example="2023-05-10", description="Availability date"),
+     *          )
+     *      )
+     * )
+     */
+
+
+Flight::route('POST /api/locations', function () {
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::locationService()->add($data));
+    Flight::json(Flight::locationService()->add('locations', $data));
 });
 
-//does not work
-//get number of bookings per location
-Flight::route('GET /locations/bookings/@location_id', function ($location_id) {
-    Flight::json(Flight::locationService()->getNumberOfBookingsPerLocation($location_id));
-});
+  /**
+     * @OA\Get(
+     *      path="/api/locations/{location_id}",
+     *      tags={"locations"},
+     *      summary="Get locations by id",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Location data, or false if location does not exist"
+     *      ),
+     *      @OA\Parameter(@OA\Schema(type="number"), in="query", name="location_id", example="1", description="Location ID")
+     * )
+     */
 
-//does not work
-/*get contact of a rental based on a location_id, however I wrote here id because the name in the DB table is id, and I thought perhaps
-that was creating the issue*/
-Flight::route('GET /locations/contact/@id', function ($id) {
-    Flight::json(Flight::locationService()->getContactInfo($id));
-});
 
-//works
-Flight::route('DELETE /locations/@location_id', function ($location_id) {
+
+     Flight::route('GET /api/locations/@location_id', function ($location_id) {
+        Flight::json(Flight::locationService()->getById($location_id));
+    });
+
+ /**
+     * @OA\Delete(
+     *      path="/api/locations/{location_id}",
+     *      tags={"locations"},
+     *      summary="Delete location by id",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Deleted location data or 500 status code exception otherwise"
+     *      ),
+     *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="location_id", example="1", description="Location ID")
+     * )
+     */
+
+Flight::route('DELETE /api/locations/@location_id', function ($location_id) {
     Flight::locationService()->delete($location_id);
 });
 
-//works
-Flight::route('GET /locations/@location_id', function ($location_id) {
-    Flight::json(Flight::locationService()->get_by_id($location_id));
+
+
+Flight::route("PUT /api/locations/@location_id", function($location_id){
+    $data = Flight::request()->data->getData();
+    $data['id'] = $location_id;
+
+    
+    try {
+        Flight::locationService()->update_location($data); // Only pass data
+        $updatedLocation = Flight::locationService()->getById($location_id);
+        Flight::json($updatedLocation);
+    } catch (Exception $e) {
+        // Handle update error
+        Flight::halt(500, 'Failed to update location: ' . $e->getMessage());
+    }
 });
 
-//works
-Flight::route("PUT /locations/@location_id", function($location_id){
-    $data = Flight::request()->data->getData();
-    Flight::json(['message' => 'Location edited succesfully', 'data' => Flight::locationService()->update($data, $location_id)]); 
-    //-> converts the results to the JSON form
-    //This array we could have created above, store it in a variable, and then call that variable or do it directly like this
-});
+
+// Flight::route("PUT /api/locations/@location_id", function($location_id){
+//     $data = Flight::request()->data->getData();
+//     Flight::locationService()->update_($location_id, $data);
+//     Flight::json(Flight::locationService()->getById($location_id));
+// });
