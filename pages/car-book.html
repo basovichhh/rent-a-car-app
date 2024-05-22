@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Car</title>
+
+    <link rel="stylesheet" href="../assets/css/car-details.css">
+SS</head>
+<body>
+
+    <div class="car-details-container">
+        <!-- Car details will be loaded here -->
+    </div>
+
+    <div class="booking-form-container">
+        <h2>Book this car</h2>
+        <form id="booking-form">
+            <div>
+                <label for="pickup-location">Pick-up Location:</label>
+                <select id="pickup-location" name="pickup-location" required></select>
+            </div>
+            <div>
+                <label for="dropoff-location">Drop-off Location:</label>
+                <select id="dropoff-location" name="dropoff-location" required></select>
+            </div>
+            <div>
+                <label for="card-holder-name">Card Holder Name:</label>
+                <input type="text" id="card-holder-name" name="card-holder-name" required>
+            </div>
+            <div>
+                <label for="card-number">Credit Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="1234 1234 1234 1234" required>
+            </div>
+            <div>
+                <label for="exp-date">Expiry Date:</label>
+                <input type="text" id="exp-date" name="exp-date" placeholder="MM/YY" required>
+            </div>
+            <div>
+                <label for="ccv">CCV:</label>
+                <input type="text" id="ccv" name="ccv"  placeholder="123" required>
+            </div>
+            <div>
+                <label for="zip-code">Zip Code:</label>
+                <input type="text" id="zip-code" name="zip-code" placeholder="71300" required>
+            </div>
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
+
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
+    <script src="../assets/js/jquerry.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to get URL parameters
+            function getURLParameter(name) {
+                return new URLSearchParams(window.location.search).get(name);
+            }
+
+            // Function to display car details
+            function displayCarDetails(carData) {
+                var detailsHTML = `
+                    <h1>${carData.name} - ${carData.manufacturer}</h1>
+                    <img src="../assets/images/${carData.image}" alt="${carData.name}" style="width:100%;">
+                    <p>${carData.name}</p>
+                    <p>Price: ${carData.price}</p>
+                    <p>Mileage: ${carData.mileage}</p>
+                    <p>Transmission: ${carData.transmission}</p>
+                    <p>Seats: ${carData.seats}</p>
+                    <p>Luggage: ${carData.luggage}</p>
+                    <p>Fuel: ${carData.fuel}</p>
+                    <ul>
+                        ${carData.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                    <p>${carData.description}</p>
+                `;
+                document.querySelector('.car-details-container').innerHTML = detailsHTML;
+            }
+
+            // Get the car ID from URL parameters
+            var carId = getURLParameter('id');
+
+            // Fetch car data based on the car ID
+            fetch('../data-json/cars.json')
+                .then(response => response.json())
+                .then(data => {
+                    const carData = data.find(car => car.id == carId);
+                    displayCarDetails(carData);
+                });
+
+            // Fetch locations data
+            // Fetch locations data
+            fetch('../data-json/locations.json')
+                .then(response => response.json())
+                .then(locations => {
+                    const pickupSelect = document.getElementById('pickup-location');
+                    const dropoffSelect = document.getElementById('dropoff-location');
+                    locations.forEach(location => {
+                        let option = document.createElement('option');
+                        option.value = location.id;
+                        option.text = location.name_point + ', ' + location.address + ', ' + location.town;
+                        pickupSelect.add(option);
+
+                        let dropOption = option.cloneNode(true);
+                        dropoffSelect.add(dropOption);
+                    });
+            });
+
+
+            // Handle form submission
+            document.getElementById('booking-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const bookingData = {};
+                formData.forEach((value, key) => {
+                    bookingData[key] = value;
+                });
+
+                // Send booking data to the server
+                fetch('/api/book-car', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('Booking successful!');
+                    } else {
+                        alert('Booking failed: ' + result.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

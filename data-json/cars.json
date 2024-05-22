@@ -5,6 +5,12 @@
         "manufacturer": "Mercedes-Benz",
         "image": "car-1.jpg",
         "price": "$350",
+        "description": "The Mercedes Benz C Class Cabrio combines elegant design with powerful performance. This cabriolet offers a luxurious open-top driving experience, making it perfect for sunny days.",
+        "mileage": "57000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "petrol",
         "features": [
             "AC",
             "Child seat",
@@ -17,20 +23,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Mercedes C class",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 1,
         "name": "Range Rover Evoque",
         "manufacturer": "Range Rover",
         "image": "car-2.jpg",
-        "price": "$350",
+        "price": "$200",
+        "description": "The Range Rover Evoque is a stylish and versatile SUV. It offers a perfect blend of luxury and off-road capability, ensuring a comfortable and adventurous drive.",
+        "mileage": "250000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -43,20 +49,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Range Rover",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 2,
         "name": "Dodge Challenger",
         "manufacturer": "Dodge",
         "image": "car-4.jpg",
-        "price": "$350",
+        "price": "$400",
+        "description": "The Dodge Challenger is a classic American muscle car. Known for its bold design and powerful engine, it delivers an exhilarating driving experience.",
+        "mileage": "20000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "petrol",
         "features": [
             "AC",
             "Child seat",
@@ -69,13 +75,7 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Dodge Challenger",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 3,
@@ -83,6 +83,12 @@
         "manufacturer": "BMW",
         "image": "car-5.jpg",
         "price": "$350",
+        "description": "The BMW X5 is a luxury SUV that offers a perfect blend of performance, comfort, and technology. It is ideal for families and long journeys.",
+        "mileage": "300000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -95,20 +101,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "BMW X5",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 4,
         "name": "Alfa Romeo 4C",
         "manufacturer": "Alfa Romeo",
         "image": "car-6.jpg",
-        "price": "$350",
+        "price": "$550",
+        "description": "The Alfa Romeo 4C is a lightweight sports car known for its agility and stunning design. It offers an engaging driving experience with its sharp handling and responsive performance.",
+        "mileage": "25000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "petrol",
         "features": [
             "AC",
             "Child seat",
@@ -121,13 +127,7 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Alfa Romeo 4C",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 5,
@@ -135,6 +135,12 @@
         "manufacturer": "Mercedes-Benz",
         "image": "car-7.jpg",
         "price": "$350",
+        "description": "The Mercedes Benz E Class Cabrio offers a luxurious open-top driving experience. With its elegant design and advanced features, it's perfect for both city drives and long trips.",
+        "mileage": "170000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -147,20 +153,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Mercedes E class",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 6,
         "name": "Jeep Wrangler Rubicon",
         "manufacturer": "Jeep",
         "image": "car-8.jpg",
-        "price": "$350",
+        "price": "$300",
+        "description": "The Jeep Wrangler Rubicon is an iconic off-road vehicle. It's built to handle rough terrains with ease, making it a great choice for adventure enthusiasts.",
+        "mileage": "100000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -173,20 +179,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Jeep",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 7,
         "name": "VW Passat Alltrack",
         "manufacturer": "VW",
         "image": "passat.jpg",
-        "price": "$350",
+        "price": "$999",
+        "description": "The VW Passat Alltrack is a versatile and reliable estate car. It offers a spacious interior, advanced technology, and is perfect for long journeys and family trips.",
+        "mileage": "255000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -199,20 +205,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Truhlo",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 8,
         "name": "Mercedes Benz AMG GT",
         "manufacturer": "Mercedes-Benz",
         "image": "car-9.jpg",
-        "price": "$350",
+        "price": "$550",
+        "description": "The Mercedes Benz AMG GT is a high-performance sports car. With its sleek design and powerful engine, it offers an exhilarating driving experience.",
+        "mileage": "40000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "petrol",
         "features": [
             "AC",
             "Child seat",
@@ -225,20 +231,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Mercedes AMG GT",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 9,
         "name": "Mercedes Benz AMG GT S",
         "manufacturer": "Mercedes-Benz",
         "image": "car-10.jpg",
-        "price": "$350",
+        "price": "$600",
+        "description": "The Mercedes Benz AMG GT S is an advanced version of the AMG GT, offering even more power and luxury. It's designed for those who demand the best in performance and style.",
+        "mileage": "35000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "petrol",
         "features": [
             "AC",
             "Child seat",
@@ -251,20 +257,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Mercedes AMG GT S",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 10,
         "name": "Mercedes Benz A Class",
         "manufacturer": "Mercedes-Benz",
         "image": "car-11.jpg",
-        "price": "$350",
+        "price": "$170",
+        "description": "The Mercedes Benz A Class is a compact car that combines luxury and practicality. It's ideal for city driving with its stylish design and efficient performance.",
+        "mileage": "450000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -277,20 +283,20 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Mercedes A class",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     },
     {
         "id": 11,
         "name": "Audi Q1",
         "manufacturer": "Audi",
         "image": "car-12.jpg",
-        "price": "$350",
+        "price": "$220",
+        "description": "The Audi Q1 is a compact SUV that offers a blend of luxury, performance, and practicality. It's perfect for urban driving as well as longer journeys.",
+        "mileage": "210000",
+        "transmission": "manual",
+        "seats": "5 adults",
+        "luggage": "4 bags",
+        "fuel": "diesel",
         "features": [
             "AC",
             "Child seat",
@@ -303,12 +309,6 @@
             "Car kit",
             "Remote control locking",
             "Climate control"
-        ],
-        "description": "Audi",
-        "mileage": "40000",
-        "transmission": "manual",
-        "seats": "5 adults",
-        "luggage": "4 bags",
-        "fuel": "petrol"
+        ]
     }
 ]
