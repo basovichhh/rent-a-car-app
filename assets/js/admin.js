@@ -204,8 +204,8 @@ $('#getAllUsersModal').click(function () {
                 userHtml += '<p><strong>Email:</strong> ' + user.email + '</p>';
                 userHtml += '<p><strong>Name:</strong> ' + user.first_name + '</p>';
                 userHtml += '<p><strong>Surname:</strong> ' + user.last_name + '</p>';
-
                 userHtml += '</div>';
+                userHtml += '<hr>';
                 $('#userList').append(userHtml);
             });
             // Show the modal
@@ -294,11 +294,17 @@ $('#getAllBookingsModal').click(function () {
                     bookingHtml += '<p><strong>Booking ID:</strong> ' + booking.id + '</p>';
                     bookingHtml += '<p><strong>User ID:</strong> ' + booking.user_id + '</p>';
                     bookingHtml += '<p><strong>Car ID:</strong> ' + booking.car_id + '</p>';
-                    bookingHtml += '<p><strong>Location ID:</strong> ' + booking.location_id + '</p>';
-                    bookingHtml += '<p><strong>Date of Booking:</strong> ' + booking.date_of_booking + '</p>';
-                    bookingHtml += '<p><strong>Date of Payment:</strong> ' + booking.date_of_payment + '</p>';
-                    bookingHtml += '<p><strong>Paid:</strong> ' + booking.paid + '</p>';
+                    bookingHtml += '<p><strong>Pick up Location:</strong> ' + booking.pickup_location + '</p>';
+                    bookingHtml += '<p><strong>Drop off Location:</strong> ' + booking.dropoff_location + '</p>';
+                    bookingHtml += '<p><strong>Pick up Date:</strong> ' + booking.pickup_date + '</p>';
+                    bookingHtml += '<p><strong>Drop off Date:</strong> ' + booking.dropoff_date + '</p>';
+                    bookingHtml += '<p><strong>Card holder name:</strong> ' + booking.card_holder_name + '</p>';
+                    bookingHtml += '<p><strong>Card number:</strong> ' + booking.card_number + '</p>';
+                    bookingHtml += '<p><strong>Exp. date:</strong> ' + booking.exp_date + '</p>';
+                    bookingHtml += '<p><strong>CCV:</strong> ' + booking.ccv + '</p>';
+                    bookingHtml += '<p><strong>Zip code:</strong> ' + booking.zip_code + '</p>';
                     bookingHtml += '</div>';
+                    bookingHtml += '<hr>';
                     $('#bookingList').append(bookingHtml);
                 });
             }
@@ -310,56 +316,5 @@ $('#getAllBookingsModal').click(function () {
         }
     });
 });
-
-
-
-// payment functionality
-
-// AJAX request to add a booking
-$('.payment-button').click(function () {
-    var fullName = $('.info-name-container input').val();
-    var creditCardNumber = $('.info-card-container input').val();
-    var expDate = $('.card-exp-date-container input').val();
-    var cvv = $('.card-cvv-container input').val();
-    var zipCode = $('.card-zip-code-container input').val();
-
-    // Retrieve other booking details from the HTML table if needed
-    var user_id = 1; // Example value, replace with the actual user ID
-    var car_id = 1; // Example value, replace with the actual car ID
-    var location_id = 1; // Example value, replace with the actual location ID
-
-    var currentDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // Current date and time in MySQL format
-
-    var bookingData = {
-        user_id: user_id,
-        car_id: car_id,
-        location_id: location_id,
-        date_of_booking: currentDate, // Use current date for booking
-        date_of_payment: null, // Payment date is initially null
-        paid: 0 // Payment status is initially false
-        // Add more fields if needed
-        
-    };
-
-    // Make an AJAX POST request to add the booking
-    $.ajax({
-        url: "http://localhost/rent-a-car-app/backend/api/bookings",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(bookingData),
-        success: function (response) {
-            console.log(response);
-            alert("Booking added successfully!");
-            // Redirect or perform any other actions after successful booking
-        },
-        error: function (error) {
-            console.error('Failed to add booking:', error.statusText);
-            alert("Failed to add booking. Please try again later.");
-        }
-    });
-});
-
-    
-
 
 });
