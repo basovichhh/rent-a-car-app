@@ -39,19 +39,19 @@
             </div>
             <div>
                 <label for="card_number">Credit Card Number:</label>
-                <input type="text" id="card_number" name="card_number" placeholder="1234 1234 1234 1234" required>
+                <input type="text" id="card_number" name="card_number" placeholder="1234 1234 1234 1234" required pattern="\d{4} \d{4} \d{4} \d{4}">
             </div>
             <div>
                 <label for="exp_date">Expiry Date:</label>
-                <input type="text" id="exp_date" name="exp_date" placeholder="MM/YY" required>
+                <input type="text" id="exp_date" name="exp_date" placeholder="MM/YY" required pattern="\d{2}/\d{2}">
             </div>
             <div>
                 <label for="ccv">CCV:</label>
-                <input type="text" id="ccv" name="ccv" placeholder="123" required>
+                <input type="text" id="ccv" name="ccv" placeholder="123" required pattern="\d{3}">
             </div>
             <div>
                 <label for="zip_code">Zip Code:</label>
-                <input type="text" id="zip_code" name="zip_code" placeholder="71300" required>
+                <input type="text" id="zip_code" name="zip_code" placeholder="71300" required pattern="\d{5}">
             </div>
             <button type="submit">Book Now</button>
         </form>
@@ -59,7 +59,7 @@
 
     <script src="../assets/js/jquerry.min.js"></script>
     <script src="../assets/js/jquery1.min.js"></script> 
-	<script src="../assets/js/bootstrap-datepicker.js"></script>
+    <script src="../assets/js/bootstrap-datepicker.js"></script>
     <script>
         $(document).ready(function(){
             // Initialize datepicker for pick-up and drop-off dates
@@ -125,48 +125,75 @@
                     });
                 });
     
-                function addBooking(data) {
-                    $.ajax({
-                        url: "http://localhost/rent-a-car-app/backend/api/bookings",
-                        type: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(data),
-                        success: function (response) {
-                            console.log(response);
-                            alert("Booking added successfully!");
-                        },
-                        error: function (error) {
-                            console.error('Failed to add booking:', error.statusText);
-                            alert("Failed to add booking. Please try again later.");
-                        }
-                    });
+            function validateForm(formData) {
+                const cardNumberPattern = /^\d{4} \d{4} \d{4} \d{4}$/;
+                const expDatePattern = /^\d{2}\/\d{2}$/;
+                const ccvPattern = /^\d{3}$/;
+                const zipCodePattern = /^\d{5}$/;
+
+                if (!cardNumberPattern.test(formData.card_number)) {
+                    alert("Invalid card number format. Please enter in the format 1234 1234 1234 1234.");
+                    return false;
                 }
-            
-                // Handle form submission
-                $('#booking-form').submit(function (event) {
-                    event.preventDefault();
-            
-                    // Replace with a valid user ID for testing
-                    var userId = 27;
-            
-                    var formData = {
-                        car_id: carId,
-                        user_id: userId,
-                        pickup_location: $('#pickup_location').val(),
-                        dropoff_location: $('#dropoff_location').val(),
-                        pickup_date: $('#pickup_date').val(),
-                        dropoff_date: $('#dropoff_date').val(),
-                        card_holder_name: $('#card_holder_name').val(),
-                        card_number: $('#card_number').val(),
-                        exp_date: $('#exp_date').val(),
-                        ccv: $('#ccv').val(),
-                        zip_code: $('#zip_code').val()
-                    };
-            
-                    console.log('Form Data:', formData);
-            
-                    addBooking(formData);
+                if (!expDatePattern.test(formData.exp_date)) {
+                    alert("Invalid expiry date format. Please enter in the format MM/YY.");
+                    return false;
+                }
+                if (!ccvPattern.test(formData.ccv)) {
+                    alert("Invalid CCV format. Please enter a 3-digit CCV.");
+                    return false;
+                }
+                if (!zipCodePattern.test(formData.zip_code)) {
+                    alert("Invalid zip code format. Please enter a 5-digit zip code.");
+                    return false;
+                }
+                return true;
+            }
+
+            function addBooking(data) {
+                $.ajax({
+                    url: "http://localhost/rent-a-car-app/backend/api/bookings",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        console.log(response);
+                        alert("Booking added successfully!");
+                    },
+                    error: function (error) {
+                        console.error('Failed to add booking:', error.statusText);
+                        alert("Failed to add booking. Please try again later.");
+                    }
                 });
+            }
+            
+            // Handle form submission
+            $('#booking-form').submit(function (event) {
+                event.preventDefault();
+            
+                // Replace with a valid user ID for testing
+                var userId = 27;
+            
+                var formData = {
+                    car_id: carId,
+                    user_id: userId,
+                    pickup_location: $('#pickup_location').val(),
+                    dropoff_location: $('#dropoff_location').val(),
+                    pickup_date: $('#pickup_date').val(),
+                    dropoff_date: $('#dropoff_date').val(),
+                    card_holder_name: $('#card_holder_name').val(),
+                    card_number: $('#card_number').val(),
+                    exp_date: $('#exp_date').val(),
+                    ccv: $('#ccv').val(),
+                    zip_code: $('#zip_code').val()
+                };
+            
+                console.log('Form Data:', formData);
+            
+                if (validateForm(formData)) {
+                    addBooking(formData);
+                }
+            });
         });
         
     </script>

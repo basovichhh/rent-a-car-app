@@ -154,13 +154,6 @@ $("#login-form").validate({
 
         console.log("Contact form data:", formData);
         unblockUi("#contact-form");
-
-        // Assuming 'users' is defined elsewhere
-        users.push(formData);
-        $(form)[0].reset();
-        console.log(users);
-
-        alert("Your response was submitted successfully.");
     },
 });
 

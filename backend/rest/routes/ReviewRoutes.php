@@ -28,9 +28,11 @@ Flight::route('GET /api/reviews', function () {
  *      @OA\RequestBody(
  *          description="Review data payload",
  *          @OA\JsonContent(
- *              required={"booking_id","review_score"},
- *              @OA\Property(property="booking_id", type="integer", example=1, description="Booking id"),
- *              @OA\Property(property="review_score", type="integer", example=5, description="Review score")        
+ *              required={"name","email", "subject", "message"},
+ *              @OA\Property(property="name", type="string", example="Some name", description="Name"),
+ *              @OA\Property(property="email", type="string", example="Some email", description="Email"),
+ *              @OA\Property(property="subject", type="string", example="Some subject header", description="Subject"),
+ *              @OA\Property(property="message", type="string", example="Some user's message", description="Message")        
  *          )
  *      )
  * )
