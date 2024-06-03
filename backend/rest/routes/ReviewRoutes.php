@@ -4,6 +4,9 @@
      *      path="/api/reviews",
      *      tags={"reviews"},
      *      summary="Get all reviews",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Array of all reviews in the database"

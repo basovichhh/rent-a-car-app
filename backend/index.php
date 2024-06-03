@@ -26,6 +26,7 @@ require_once __DIR__ . '/rest/routes/LocationRoutes.php';
 require_once __DIR__ . '/rest/routes/ReviewRoutes.php';
 require_once __DIR__ . '/rest/routes/CarRoutes.php';
 require_once __DIR__ . '/rest/routes/AuthRoutes.php';
+require_once __DIR__ . '/rest/routes/MiddlewareRoutes.php';
 
 
 // it is still possible to add custom routes after the imports

@@ -5,6 +5,9 @@
      *      path="/api/users",
      *      tags={"users"},
      *      summary="Get all users",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Array of all users in the database"
@@ -29,8 +32,12 @@ Flight::route('GET /api/users', function () {
      * )
      */
 
-Flight::route('GET /api/users/@user_id', function ($user_id) {
+Flight::route('GET api/users/@user_id', function ($user_id) {
     Flight::json(Flight::userService()->get_user_by_id($user_id));
+
+    // $user = Flight::get('userService')->get_user_by_id($user_id);
+
+    // Flight::json($user, 200);
 });
 
 Flight::route('GET /api/users/@first_name/@last_name', function ($first_name, $last_name) {
@@ -84,8 +91,10 @@ Flight::route('DELETE /api/users/@user_id', function ($user_id) {
 
 Flight::route("PUT /api/users/@user_id", function($user_id){
     $data = Flight::request()->data->getData();
-    Flight::json(['message' => 'Customer edited succesfully', 'data' => Flight::userService()->update($data, $user_id)]); 
+    Flight::json(['message' => 'User edited succesfully', 'data' => Flight::userService()->update($data, $user_id)]); 
 
 });
+
+
 
 

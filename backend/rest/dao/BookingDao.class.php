@@ -35,5 +35,9 @@ class BookingDao extends BaseDao{
         return $this->query("SELECT *
         FROM bookings
         WHERE paid = 0 AND location_id = :location_id", [ "location_id" => $location_id]);
-    }  
+    } 
+
+    public function get_booking_by_id($booking_id){
+        return $this->query_unique("SELECT * FROM bookings WHERE id = :id", ['id' => $booking_id]);
+    }
 }

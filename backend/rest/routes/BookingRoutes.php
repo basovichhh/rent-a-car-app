@@ -4,6 +4,9 @@
      *      path="/api/bookings",
      *      tags={"bookings"},
      *      summary="Get all bookings",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Array of all bookings in the database"

@@ -23,7 +23,6 @@ class BookingService extends BaseService{
     }
     
 
-
     function getPaidBookingsPerLocation($location_id)
     {
         return $this->dao->getPaidBookingsPerLocation($location_id);
@@ -32,6 +31,10 @@ class BookingService extends BaseService{
     function getUnpaidBookingsPerLocation($location_id)
     {
         return $this->dao->getUnpaidBookingsPerLocation($location_id);
+    }
+
+    public function get_booking_by_id($booking_id) {
+        return $this->dao->get_booking_by_id($booking_id);
     }
     
 }
