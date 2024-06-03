@@ -9,3 +9,5 @@
 2024-06-03 20:43:03 - Call to undefined method BookingDao::get_by_id() - Code: 0
 2024-06-03 20:44:26 - Call to undefined method BookingDao::get_by_id() - Code: 0
 2024-06-03 20:45:29 - Call to undefined method ReviewDao::get_by_id() - Code: 0
+2024-06-03 23:02:10 - Call to undefined method BookingDao::get_by_id() - Code: 0
+2024-06-03 23:32:38 - Undefined array key "email" - Code: 2

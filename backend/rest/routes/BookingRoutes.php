@@ -82,11 +82,12 @@ Flight::route('DELETE /api/bookings/@booking_id', function ($booking_id) {
      *      @OA\Parameter(@OA\Schema(type="number"), in="query", name="booking_id", example="1", description="Booking ID")
      * )
      */
-
-Flight::route('GET /api/bookings/@booking_id', function ($booking_id) {
-    Flight::json(Flight::bookingService()->get_by_id($booking_id));
-});
-
+    Flight::route('GET /api/bookings/@booking_id', function ($booking_id) {
+        Flight::json(Flight::bookingService()->get_booking_by_id($booking_id));
+    });
+    
+    
+    
 Flight::route("PUT /api/bookings/@booking_id", function($booking_id){
     $data = Flight::request()->data->getData();
     Flight::json(['message' => 'Booking edited succesfully', 'data' => Flight::bookingService()->update($data, $booking_id)]); 

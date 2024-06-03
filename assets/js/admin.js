@@ -1,4 +1,4 @@
-var token = localStorage.getItem("token");
+var token = localStorage.getItem("user");
 if (token){
     $(document).ready(function () {
         function addCar(data) {
@@ -285,45 +285,48 @@ if (token){
           });
       
       
-      $('#getAllBookingsModal').click(function () {
-          $.ajax({
-              url: "http://localhost/rent-a-car-app/backend/api/bookings",
-              type: "GET",
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-              success: function (bookings) {
-                  $('#bookingList').empty();
-                  if (bookings.length === 0) {
-                      $('#bookingList').html('<p>No bookings found.</p>');
-                  } else {
-                      bookings.forEach(function(booking) {
-                          var bookingHtml = '<div class="booking">';
-                          bookingHtml += '<p><strong>Booking ID:</strong> ' + booking.id + '</p>';
-                          bookingHtml += '<p><strong>User ID:</strong> ' + booking.user_id + '</p>';
-                          bookingHtml += '<p><strong>Car ID:</strong> ' + booking.car_id + '</p>';
-                          bookingHtml += '<p><strong>Pick up Location:</strong> ' + booking.pickup_location + '</p>';
-                          bookingHtml += '<p><strong>Drop off Location:</strong> ' + booking.dropoff_location + '</p>';
-                          bookingHtml += '<p><strong>Pick up Date:</strong> ' + booking.pickup_date + '</p>';
-                          bookingHtml += '<p><strong>Drop off Date:</strong> ' + booking.dropoff_date + '</p>';
-                          bookingHtml += '<p><strong>Card holder name:</strong> ' + booking.card_holder_name + '</p>';
-                          bookingHtml += '<p><strong>Card number:</strong> ' + booking.card_number + '</p>';
-                          bookingHtml += '<p><strong>Exp. date:</strong> ' + booking.exp_date + '</p>';
-                          bookingHtml += '<p><strong>CCV:</strong> ' + booking.ccv + '</p>';
-                          bookingHtml += '<p><strong>Zip code:</strong> ' + booking.zip_code + '</p>';
-                          bookingHtml += '</div>';
-                          bookingHtml += '<hr>';
-                          $('#bookingList').append(bookingHtml);
-                      });
-                  }
-                  $('#getAllBookingsModal').modal('show');
-              },
-              error: function (error) {
-                  console.error('Failed to fetch bookings:', error.statusText);
-                  alert("Failed to fetch bookings. Please try again later.");
-              }
-          });
-      });
+          $('#getAllBookingsModal').click(function () {
+            var token = localStorage.getItem("token");
+            console.log("Token from localStorage:", token);
+            $.ajax({
+                url: "http://localhost/rent-a-car-app/backend/api/bookings",
+                type: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+                success: function (bookings) {
+                    $('#bookingList').empty();
+                    if (bookings.length === 0) {
+                        $('#bookingList').html('<p>No bookings found.</p>');
+                    } else {
+                        bookings.forEach(function(booking) {
+                            var bookingHtml = '<div class="booking">';
+                            bookingHtml += '<p><strong>Booking ID:</strong> ' + booking.id + '</p>';
+                            bookingHtml += '<p><strong>User ID:</strong> ' + booking.user_id + '</p>';
+                            bookingHtml += '<p><strong>Car ID:</strong> ' + booking.car_id + '</p>';
+                            bookingHtml += '<p><strong>Pick up Location:</strong> ' + booking.pickup_location + '</p>';
+                            bookingHtml += '<p><strong>Drop off Location:</strong> ' + booking.dropoff_location + '</p>';
+                            bookingHtml += '<p><strong>Pick up Date:</strong> ' + booking.pickup_date + '</p>';
+                            bookingHtml += '<p><strong>Drop off Date:</strong> ' + booking.dropoff_date + '</p>';
+                            bookingHtml += '<p><strong>Card holder name:</strong> ' + booking.card_holder_name + '</p>';
+                            bookingHtml += '<p><strong>Card number:</strong> ' + booking.card_number + '</p>';
+                            bookingHtml += '<p><strong>Exp. date:</strong> ' + booking.exp_date + '</p>';
+                            bookingHtml += '<p><strong>CCV:</strong> ' + booking.ccv + '</p>';
+                            bookingHtml += '<p><strong>Zip code:</strong> ' + booking.zip_code + '</p>';
+                            bookingHtml += '</div>';
+                            bookingHtml += '<hr>';
+                            $('#bookingList').append(bookingHtml);
+                        });
+                    }
+                    $('#getAllBookingsModal').modal('show');
+                },
+                error: function (error) {
+                    console.error('Failed to fetch bookings:', error.statusText);
+                    alert("Failed to fetch bookings. Please try again later.");
+                }
+            });
+        });
+        
       
       });
       

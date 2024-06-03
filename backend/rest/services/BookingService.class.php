@@ -2,7 +2,6 @@
 require_once __DIR__ . "/BaseService.class.php";
 require_once __DIR__ . "/../dao/BookingDao.class.php";
 
-
 class BookingService extends BaseService{
 
     public $booking_dao;
@@ -22,7 +21,6 @@ class BookingService extends BaseService{
         return $this->booking_dao->add($booking_data);
     }
     
-
     function getPaidBookingsPerLocation($location_id)
     {
         return $this->dao->getPaidBookingsPerLocation($location_id);
