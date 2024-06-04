@@ -35,5 +35,23 @@ class BookingDao extends BaseDao{
         return $this->query("SELECT *
         FROM bookings
         WHERE paid = 0 AND location_id = :location_id", [ "location_id" => $location_id]);
-    }  
+    } 
+
+    public function get_booking_by_id($booking_id){
+        $query = "SELECT * FROM bookings WHERE id = :id";
+        $params = ['id' => $booking_id];
+    
+        // Check if the booking exists
+        $countQuery = "SELECT COUNT(*) AS count FROM bookings WHERE id = :id";
+        $count = $this->query_unique($countQuery, $params);
+    
+        if ($count['count'] > 0) {
+            // Booking exists, fetch the details
+            return $this->query_unique($query, $params);
+        } else {
+            // Booking does not exist
+            return null;
+        }
+    }
+    
 }

@@ -4,6 +4,9 @@
      *      path="/api/bookings",
      *      tags={"bookings"},
      *      summary="Get all bookings",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Array of all bookings in the database"
@@ -27,10 +30,17 @@ Flight::route('GET /api/bookings', function () {
      *      @OA\RequestBody(
      *          description="Booking data payload",
      *          @OA\JsonContent(
-     *              required={"date_of_booking","date_of_payment","paid"},
-     *              @OA\Property(property="date_of_booking", type="string", example="Some date", description="Booking date"),
-     *              @OA\Property(property="date_of_payment", type="string", example="Some payment date", description="Payment date"),
-     *              @OA\Property(property="paid", type="string", example="Paid value", description="Paid value"),
+     *              required={"pickup_location","dropoff_location","pickup_date", "dropoff_date", "card_holder_name", "card_number", "exp_date", "ccv", "zip_code"},
+     *              @OA\Property(property="pickup_location", type="string", example="Pick up location", description="Booking pick up location"),
+     *              @OA\Property(property="dropoff_location", type="string", example="Drop off location", description="Booking drop off location"),
+     *              @OA\Property(property="pickup_date", type="string", example="Some payment date", description="Payment date"),
+     *              @OA\Property(property="dropoff_date", type="string", example="Some payment date", description="Payment date"),
+     *              @OA\Property(property="card_holder_name", type="string", example="Card holder name", description="Card holder name"),
+     *              @OA\Property(property="card_number", type="string", example="Card number", description="Card number"),
+     *              @OA\Property(property="exp_date", type="string", example="Some card exp. date", description="Exp. date"),
+     *              @OA\Property(property="ccv", type="string", example="Some card ccv", description="CCV"),
+     *              @OA\Property(property="zip_code", type="integer", example="71300", description="Card zip code"),
+     *              
      *          )
      *      )
      * )
@@ -72,11 +82,12 @@ Flight::route('DELETE /api/bookings/@booking_id', function ($booking_id) {
      *      @OA\Parameter(@OA\Schema(type="number"), in="query", name="booking_id", example="1", description="Booking ID")
      * )
      */
-
-Flight::route('GET /api/bookings/@booking_id', function ($booking_id) {
-    Flight::json(Flight::bookingService()->get_by_id($booking_id));
-});
-
+    Flight::route('GET /api/bookings/@booking_id', function ($booking_id) {
+        Flight::json(Flight::bookingService()->get_booking_by_id($booking_id));
+    });
+    
+    
+    
 Flight::route("PUT /api/bookings/@booking_id", function($booking_id){
     $data = Flight::request()->data->getData();
     Flight::json(['message' => 'Booking edited succesfully', 'data' => Flight::bookingService()->update($data, $booking_id)]); 

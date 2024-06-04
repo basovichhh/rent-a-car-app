@@ -10,6 +10,9 @@ Flight::set('car_service', new CarService());
      *      path="/api/cars",
      *      tags={"cars"},
      *      summary="Get all cars",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Array of all cars in the database"

@@ -34,9 +34,6 @@ html,body{
 
 header{
   width: 100%;
-  
-  
-  
 }
 
 
@@ -53,9 +50,6 @@ header{
   top: 0;
   left: 0;
   right: 0;
-  
-
- 
 }
 
 .nav_links li {
@@ -70,7 +64,6 @@ header{
   color: #fff; 
   font-weight: bold;
   transition: background-color 0.2s ease-in-out;
-  
 }
 
 .nav_links li a:hover {
@@ -217,38 +210,34 @@ form .signup-link a{
     <div class="title">
         Register
     </div>
-    <form action="#">
+    <form action="#" id="register-form">
         <div class="field">
-            <input type="email" required>
+            <input type="email" id="email" name="email" required>
             <label>Email Address</label>
         </div>
         <div class="field">
-            <input type="password" required>
+            <input type="password" id="pwd" name="pwd" required>
             <label>Password</label>
         </div>
         <div class="field">
-            <input type="password" required>
-            <label>Confirm Password</label>
-        </div>
-        <div class="field">
-            <input type="text" required>
+            <input type="text" id="first_name" name="first_name" required>
             <label>Name</label>
         </div>
         <div class="field">
-            <input type="text" required>
+            <input type="text"  id="last_name" name="last_name"required>
             <label>Surname</label>
         </div>
         <div class="field">
-            <input type="submit" value="Register">
+            <input id="register-user" type="submit" value="Register">
         </div>
     </form>
     <div class="signup-link">
-        <a href="login.html">Already have an account? Login</a>
+        <a href="http://localhost/rent-a-car-app/login/index.html">Already have an account? Login</a>
     </div>
 </div>
 
 </div>
-
+<script src="../assets/js/register.js"></script>
 
 </body>
 </html>

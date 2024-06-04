@@ -5,6 +5,9 @@
      *      path="/api/locations",
      *      tags={"locations"},
      *      summary="Get all locations",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Array of all locations in the database"

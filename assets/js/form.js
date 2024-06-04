@@ -154,13 +154,6 @@ $("#login-form").validate({
 
         console.log("Contact form data:", formData);
         unblockUi("#contact-form");
-
-        // Assuming 'users' is defined elsewhere
-        users.push(formData);
-        $(form)[0].reset();
-        console.log(users);
-
-        alert("Your response was submitted successfully.");
     },
 });
 
@@ -277,114 +270,94 @@ $("#pick-up-time").timepicker({
   scrollbar: true
 });
 
-$("#rent-form").validate({
+// Booking form validation and submission
+$("#booking-form").validate({
   rules: {
-      "pick-up-location": {
-          required: true,
-      },
-      "drop-off-location": {
-          required: true,
-      },
-      "pick-up-date": {
-          required: true,
-      },
-      "drop-off-date": {
-          required: true,
-      },
-      "pick-up-time": {
-          required: true,
-      },
+    "pickup_location": {
+      required: true,
+    },
+    "dropoff_location": {
+      required: true,
+    },
+    "pickup_date": {
+      required: true,
+    },
+    "dropoff_date": {
+      required: true,
+    },
+    "card_holder_name": {
+      required: true,
+    },
+    "card_number": {
+      required: true,
+      creditcard: true, // Ensures valid credit card number
+    },
+    "exp_date": {
+      required: true,
+      date: true, // Ensures valid date format
+    },
+    "ccv": {
+      required: true,
+      digits: true, // Ensures only numeric digits
+      minlength: 3,
+      maxlength: 4,
+    },
+    "zip_code": {
+      required: true,
+      digits: true, // Ensures only numeric digits
+    },
   },
   messages: {
-      "pick-up-location": {
-          required: "Please enter pick-up location.",
-      },
-      "drop-off-location": {
-          required: "Please enter drop-off location.",
-      },
-      "pick-up-date": {
-          required: "Please select pick-up date.",
-      },
-      "drop-off-date": {
-          required: "Please select drop-off date.",
-      },
-      "pick-up-time": {
-          required: "Please enter pick-up time.",
-      },
+    "pickup_location": {
+      required: "Please enter pick-up location.",
+    },
+    "dropoff_location": {
+      required: "Please enter drop-off location.",
+    },
+    "pickup_date": {
+      required: "Please select pick-up date.",
+    },
+    "dropoff_date": {
+      required: "Please select drop-off date.",
+    },
+    "card_holder_name": {
+      required: "Please enter the card holder's name.",
+    },
+    "card_number": {
+      required: "Please enter a credit card number.",
+      creditcard: "Please enter a valid credit card number.",
+    },
+    "exp_date": {
+      required: "Please enter the expiry date.",
+      date: "Please enter a valid date (MM/YY).",
+    },
+    "ccv": {
+      required: "Please enter the CCV.",
+      digits: "CCV must be a numeric value.",
+      minlength: "CCV must be at least 3 digits.",
+      maxlength: "CCV can be at most 4 digits.",
+    },
+    "zip_code": {
+      required: "Please enter the zip code.",
+      digits: "Zip code must be a numeric value.",
+    },
   },
   submitHandler: function (form, event) {
-      event.preventDefault();
-      blockUi("#rent-form");
-      let formData = $(form).serialize();
-
-      console.log("Rent form data:", formData);
-      unblockUi("#rent-form");
-
-      trips.push(formData);
-      $(form)[0].reset();
-      console.log(trips);
-
-      alert("Your trip has been booked successfully.");
+    event.preventDefault();
+    blockUi("#booking-form");
+    
+    let formData = serializeForm(form); // Using serializeForm for consistency
+    console.log("Rent form data:", formData);
+    
+    trips.push(formData);
+    $(form)[0].reset();
+    console.log(trips);
+    
+    unblockUi("#booking-form");
+    alert("Your car has been booked successfully.");
   },
 });
 
-
-$(document).ready(function () {
-  $("#payment-form").validate({
-      rules: {
-          full_name: {
-              required: true,
-              minlength: 5,
-          },
-          credit_card_number: {
-              required: true,
-              minlength: 16,
-          },
-          card_exp_date: {
-              required: true,
-              minlength: 5,
-          },
-          card_cvv: {
-              required: true,
-              minlength: 3,
-          },
-          card_zip_code: {
-              required: true,
-              minlength: 5,
-          },
-      },
-      messages: {
-          full_name: {
-              required: "Please enter your full name.",
-              minlength: "Full name must be at least 5 characters long.",
-          },
-          credit_card_number: {
-              required: "Please enter your credit card number.",
-              minlength: "Credit card number must be 16 digits long.",
-          },
-          card_exp_date: {
-              required: "Please enter the expiration date.",
-              minlength: "Please enter in the format MM/YY.",
-          },
-          card_cvv: {
-              required: "Please enter your CVV.",
-              minlength: "CVV must be 3 digits long.",
-          },
-          card_zip_code: {
-              required: "Please enter your zip code.",
-              minlength: "Zip code must be 5 digits long.",
-          },
-      },
-      submitHandler: function (form, event) {
-          event.preventDefault();
-          // Your form submission logic here
-          console.log("Form submitted successfully!");
-      },
-  });
-});
-
-  
-  
 
   blockUi = (element) => {
     $(element).block({
