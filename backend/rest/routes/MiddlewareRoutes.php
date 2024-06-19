@@ -33,13 +33,11 @@ Flight::route('/*', function () {
 
 // Error handling
 Flight::map('error', function (Throwable $e) {
-    // Log the error message and code
     file_put_contents('logs.txt', date('Y-m-d H:i:s') . ' - ' . $e->getMessage() . ' - Code: ' . $e->getCode() . PHP_EOL, FILE_APPEND | LOCK_EX);
 
-    // Halt with an appropriate HTTP status code and message
     $code = $e->getCode();
     if ($code < 100 || $code >= 600) {
-        $code = 500; // Ensure the code is a valid HTTP status code
+        $code = 500; 
     }
     Flight::json(["error" => $e->getMessage()], $code);
     Flight::stop();

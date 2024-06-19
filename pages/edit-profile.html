@@ -1,163 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <body>
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-          <div class="col-md-9 ftco-animate pb-5">
-            <p class="breadcrumbs"><span class="mr-2"><a href="#pocetna">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-3 bread">Contact Us</h1>
-          </div>
-        </div>
-      </div>
-    </section>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+ž</head>
+<body>
+  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
     <div class="container">
-      <div class="row mt-5">
-        <!-- Profile Edit Form -->
-        <div class="col-md-6">
-          <h2>Edit Profile</h2>
-          <form id="edit-profile-form" method="post">
-            <div class="mb-3">
-              <label for="first_name" class="form-label">First name</label>
-              <input type="text" class="form-control" id="first_name" name="first_name" required>
-            </div>
-            <div class="mb-3">
-              <label for="last_name" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="last_name" name="last_name" required>
-            </div>
-            <div class="mb-3">
-              <label for="bio" class="form-label">Bio</label>
-              <textarea class="form-control" id="bio" name="bio" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-          </form>
-        </div>
-
-        <!-- Divider -->
-        <div class="col-md-1">
-          <div class="vertical-divider"></div>
-        </div>
-
-        <!-- Change Password Form -->
-        <div class="col-md-5">
-          <h2>Change Password</h2>
-          <form id="change-password-form" method="post">
-            <div class="mb-3">
-              <label for="current_password" class="form-label">Current Password</label>
-              <input type="password" class="form-control" id="current_password" name="current-password" required>
-            </div>
-            <div class="mb-3">
-              <label for="new_password" class="form-label">New Password</label>
-              <input type="password" class="form-control" id="new_password" name="new-password" required>
-            </div>
-            <div class="mb-3">
-              <label for="confirm_password" class="form-label">Confirm New Password</label>
-              <input type="password" class="form-control" id="confirm_password" name="confirm-new-password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Change Password</button>
-          </form>
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+        <div class="col-md-9 ftco-animate pb-5">
+          <p class="breadcrumbs"><span class="mr-2"><a href="#pocetna">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
+          <h1 class="mb-3 bread">Contact Us</h1>
         </div>
       </div>
     </div>
+  </section>
 
-    <script src="./assets/js/jquery-3.2.1.min.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/block-ui.js"></script>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <h2>Edit Profile</h2>
+        <form id="edit-profile-form" method="post">
+          <div class="mb-3">
+            <label for="current_password" class="form-label">Current Password</label>
+            <input type="password" class="form-control" id="current_password" name="current-password" required>
+          </div>
+          <div class="mb-3">
+            <label for="new_pwd" class="form-label">New Password</label>
+            <input type="password" class="form-control" id="new_pwd" name="new-password" required>
+          </div>
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm New Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm-new-password" required>
+          </div>
+          <div class="mb-3">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea class="form-control" id="bio" name="bio" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <script>
-      $(document).ready(function () {
-        // Validate Edit Profile Form
-        $('#edit-profile-form').validate({
-          rules: {
-            first_name: {
-              required: true
-            },
-            last_name: {
-              required: true
-            },
-            bio: {
-              required: true
-            }
+  <!-- Include jQuery and your custom JavaScript files -->
+  <script src="./assets/js/jquery-3.2.1.min.js"></script>
+  <script src="./assets/js/jquery.validate.min.js"></script>
+  <script src="./assets/js/block-ui.js"></script>
+  
+
+  <script>
+    $(document).ready(function() {
+      $('#edit-profile-form').submit(function(event) {
+        // Prevent default form submission
+        event.preventDefault();
+    
+        // Parse user data from local storage
+        var userData = JSON.parse(localStorage.getItem('user'));
+    
+        // Ensure userData is valid and contains 'id'
+        if (!userData || !userData.id) {
+          console.error('User ID not found in local storage.');
+          return;
+        }
+    
+        var userId = userData.id;
+    
+        // Serialize form data
+        var formData = $(this).serialize();
+    
+        // Validate form fields (optional but recommended)
+        var newPwd = $('#new_pwd').val();
+        var bio = $('#bio').val();
+    
+        if (!newPwd && !bio) {
+          // Optionally, you can provide user feedback if both fields are empty
+          console.error('Either new password or bio must be provided.');
+          return;
+        }
+    
+        // Send AJAX request
+        $.ajax({
+          type: 'PUT', // Use PUT method to update user profile
+          url: 'http://localhost/rent-a-car-app/backend/api/users/' + userId + '/update-profile',
+          data: formData,
+          beforeSend: function() {
+            // Optionally, add a loading indicator or disable the submit button
+            $.blockUI(); // Example: using block-ui.js for blocking UI during AJAX request
           },
-          messages: {
-            first_name: "Please enter your first name",
-            last_name: "Please enter your last name",
-            bio: "Please enter your bio"
+          success: function(response) {
+            // Handle successful response from server
+            console.log('Success:', response);
+            // Optionally, show a success message to the user
+            $('#success-message').text('Profile updated successfully.').fadeIn().delay(3000).fadeOut(); // Example: Display success message
           },
-          submitHandler: function (form) {
-            var formData = {
-              first_name: $('#first_name').val(),
-              last_name: $('#last_name').val(),
-              bio: $('#bio').val()
-            };
-
-            $.ajax({
-              type: 'POST',
-              url: 'http://localhost/rent-a-car-app/backend/api/users',
-              data: JSON.stringify(formData),
-              contentType: 'application/json',
-              success: function (response) {
-                alert('Profile changes saved successfully!');
-              },
-              error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('Error occurred while saving profile changes. Please try again later.');
-              }
-            });
-          }
-        });
-
-        // Validate Change Password Form
-        $('#change-password-form').validate({
-          rules: {
-            'current-password': {
-              required: true
-            },
-            'new-password': {
-              required: true,
-              minlength: 6
-            },
-            'confirm-new-password': {
-              required: true,
-              equalTo: '#new_password'
-            }
+          error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error:', error);
+            // Optionally, display an error message to the user
+            $('#error-message').text('Failed to update profile. Please try again.').fadeIn().delay(3000).fadeOut(); // Example: Display error message
           },
-          messages: {
-            'current-password': "Please enter your current password",
-            'new-password': {
-              required: "Please enter a new password",
-              minlength: "Your new password must be at least 6 characters long"
-            },
-            'confirm-new-password': {
-              required: "Please confirm your new password",
-              equalTo: "New password and confirmation do not match"
-            }
-          },
-          submitHandler: function (form) {
-            var formData = {
-              current_password: $('#current_password').val(),
-              new_password: $('#new_password').val(),
-              confirm_new_password: $('#confirm_password').val()
-            };
-
-            $.ajax({
-              type: 'POST',
-              url: 'http://localhost/rent-a-car-app/backend/api/users/change-password',
-              data: JSON.stringify(formData),
-              contentType: 'application/json',
-              success: function (response) {
-                alert('Password changed successfully!');
-              },
-              error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('Error occurred while changing password. Please try again later.');
-              }
-            });
+          complete: function() {
+            // Unblock UI and reset form if needed
+            $.unblockUI(); // Example: unblock UI after AJAX request completes
+            $('#edit-profile-form')[0].reset(); // Reset form
           }
         });
       });
-    </script>
-  </body>
+    });
+    
+  </script>
+  
+</body>
 </html>

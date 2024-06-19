@@ -24,6 +24,9 @@ Flight::route('GET /api/locations', function () {
      *      path="/api/locations",
      *      tags={"locations"},
      *      summary="Add location data to the database",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Location data, or exception if location is not added properly"
@@ -54,6 +57,9 @@ Flight::route('POST /api/locations', function () {
      *      path="/api/locations/{location_id}",
      *      tags={"locations"},
      *      summary="Get locations by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Location data, or false if location does not exist"
@@ -73,6 +79,9 @@ Flight::route('POST /api/locations', function () {
      *      path="/api/locations/{location_id}",
      *      tags={"locations"},
      *      summary="Delete location by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Deleted location data or 500 status code exception otherwise"

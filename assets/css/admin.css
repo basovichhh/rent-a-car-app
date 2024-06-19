@@ -30,6 +30,38 @@ h1, h5 {
     background-color: #0056b3;
 }
 
+#dashboardBtn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #65a728; /* Different color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dashboardBtn:hover {
+    background-color: #218838;
+}
+
+#log-out{
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    background-color: #65a728; /* Different color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#log-out:hover{
+    background-color: #218838;
+}
+
 .modal-body, .modal-footer {
     text-align: center; /* Center align modal body and footer */
 }

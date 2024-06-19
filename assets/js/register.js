@@ -40,15 +40,10 @@ function registerUser() {
     })
     .then(data => {
         messageElement.textContent = 'Registration successful!';
+        // Optionally, you can redirect the user or perform other actions upon successful registration
+        window.location.href = '../login/index.html'; 
     })
     .catch(error => {
         messageElement.textContent = `Error: ${error.message}`;
     });
-}s
-
-// TODO dodati success message / error za registraciju i provjeriti ovo 
-
-// .catch(error => {
-//     messageElement.textContent = `Error: ${error.message}`;
-// });
-// }s
+}

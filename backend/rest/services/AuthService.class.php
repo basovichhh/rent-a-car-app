@@ -24,3 +24,4 @@ class AuthService {
         return $this->auth_dao->insert_user($user);
     }
 }
+?>
