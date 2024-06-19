@@ -23,6 +23,9 @@ Flight::route('GET /api/bookings', function () {
      *      path="/api/bookings",
      *      tags={"bookings"},
      *      summary="Add booking data to the database",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Booking data, or exception if booking is not added properly"
@@ -58,6 +61,9 @@ Flight::route('POST /api/bookings', function () {
      *      path="/api/bookings/{booking_id}",
      *      tags={"bookings"},
      *      summary="Delete booking by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Deleted booking data or 500 status code exception otherwise"
@@ -75,6 +81,9 @@ Flight::route('DELETE /api/bookings/@booking_id', function ($booking_id) {
      *      path="/api/bookings/{booking_id}",
      *      tags={"bookings"},
      *      summary="Get bookings by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Booking data, or false if booking does not exist"

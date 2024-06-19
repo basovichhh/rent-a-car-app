@@ -24,8 +24,9 @@
     <button type="button" class="button" data-toggle="modal" data-target="#deleteUserModal">Delete User</button>
     <button type="button" class="button" data-toggle="modal" data-target="#getAllBookingsModal">Get All Bookings</button>
 
-
-
+    <!-- Dashboard redirecting button -->
+    <button type="button" class="button" onclick="window.location.href='index.html'" id="dashboardBtn">Go to Dashboard</button>
+    <button type="button" class="button" id="log-out">Log out</button>
   </div>
 
   <!-- cars -->
@@ -335,6 +336,10 @@
             <label for="pwd">Password</label>
             <input type="password" class="form-control" id="pwd" name="pwd">
           </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin" value="1">
+            <label class="form-check-label" for="is_admin">Admin</label>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -344,6 +349,7 @@
     </div>
   </div>
 </div>
+
 
 
 <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
@@ -414,6 +420,14 @@
 </div>
 
 <script>
+
+  function logout() {
+    window.localStorage.clear();
+    
+    window.location = "login/index.html";
+  }
+
+  document.getElementById("log-out").onclick = logout;
   // Function to show success modal
   function showSuccessModal() {
     $('#successModal').modal('show');

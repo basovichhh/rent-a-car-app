@@ -28,6 +28,9 @@ Flight::route('GET /api/cars', function () {
      *      path="/api/cars",
      *      tags={"cars"},
      *      summary="Add car data to the database",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Car data, or exception if car is not added properly"
@@ -55,6 +58,9 @@ Flight::route('POST /api/cars', function () {
      *      path="/api/cars/{car_id}",
      *      tags={"cars"},
      *      summary="Delete car by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Deleted car data or 500 status code exception otherwise"
@@ -72,6 +78,9 @@ Flight::route('DELETE /api/cars/@car_id', function ($car_id) {
      *      path="/cars/{car_id}",
      *      tags={"cars"},
      *      summary="Get car by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Car data, or false if car does not exist"

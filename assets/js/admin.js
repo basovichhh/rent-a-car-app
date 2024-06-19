@@ -223,44 +223,45 @@ if (token){
           });
       });
       
-      function addUser(data) {
-          $.ajax({
-              url: "http://localhost/rent-a-car-app/backend/api/users",
-              type: "POST",
-              contentType: "application/json",
-              data: JSON.stringify(data),
-              success: function (response) {
-                  console.log(response);
-                  alert("User added successfully!");
-              },
-              error: function (error) {
-                  console.error('Failed to add user:', error.statusText);
-                  alert("Failed to add user. Please try again later.");
-              }
-          });
-      }
-      
-      $('#add-user').click(function () {
+      $(document).ready(function() {
+        $('#add-user').click(function () {
           var first_name = $('#first_name').val();
           var last_name = $('#last_name').val();
           var email = $('#email').val();
           var pwd = $('#pwd').val();
-          console.log(email); // Add this line to check if the email value is captured correctly
-      
+          var is_admin = $('#is_admin').prop('checked') ? 1 : 0; // Check if checkbox is checked
       
           var userData = {
-              first_name: first_name,
-              last_name: last_name,
-              email: email,
-              pwd: pwd
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            pwd: pwd,
+            is_admin: is_admin
           };
       
-          console.log(userData); // Add this line to check if the userData object contains the correct values
-      
-      
-          addUser(userData);
-          $('#add-user').modal('hide');
+          addUser(userData); 
+          $('#addUserModal').modal('hide'); 
+        });
       });
+      
+      function addUser(userData) {
+        $.ajax({
+          url: "http://localhost/rent-a-car-app/backend/api/users",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(userData),
+          success: function (response) {
+            console.log(response);
+            alert("User added successfully!");
+            $('#successModal').modal('show');
+          },
+          error: function (error) {
+            console.error('Failed to add user:', error.statusText);
+            alert("Failed to add user. Please try again later.");
+          }
+        });
+      }
+      
       
       
           function deleteUser(userId) {

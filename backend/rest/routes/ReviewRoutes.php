@@ -24,6 +24,9 @@ Flight::route('GET /api/reviews', function () {
  *      path="/api/reviews",
  *      tags={"reviews"},
  *      summary="Add reviews data to the database",
+ *      security={
+ *          {"ApiKey": {}}   
+ *      },
  *      @OA\Response(
  *           response=200,
  *           description="Review data, or exception if review is not added properly"
@@ -52,6 +55,9 @@ Flight::route('POST /api/reviews', function () {
      *      path="/api/reviews/{review_id}",
      *      tags={"reviews"},
      *      summary="Delete review by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Deleted review data or 500 status code exception otherwise"
@@ -72,6 +78,9 @@ Flight::route('DELETE /api/reviews/@review_id', function ($review_id) {
      *      path="/api/reviews/{review_id}",
      *      tags={"reviews"},
      *      summary="Get review by id",
+     *      security={
+     *          {"ApiKey": {}}   
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Review data, or false if review does not exist"

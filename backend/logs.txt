@@ -1,13 +1,14 @@
-2024-06-03 20:17:55 - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'password' in 'field list' - Code: 42S22
-2024-06-03 20:20:31 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1234 1234 1234 1234' for key 'bookings.card_number_UNIQUE' - Code: 23000
-2024-06-03 20:20:38 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1234 1234 1234 1234' for key 'bookings.card_number_UNIQUE' - Code: 23000
-2024-06-03 20:39:52 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 20:40:00 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 20:40:01 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 20:41:26 - Call to undefined method BookingService::getById() - Code: 0
-2024-06-03 20:42:08 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 20:43:03 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 20:44:26 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 20:45:29 - Call to undefined method ReviewDao::get_by_id() - Code: 0
-2024-06-03 23:02:10 - Call to undefined method BookingDao::get_by_id() - Code: 0
-2024-06-03 23:32:38 - Undefined array key "email" - Code: 2
+2024-06-06 15:10:18 - Undefined array key "pwd" - Code: 2
+2024-06-18 17:08:06 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'mintinian13@gmail.com' for key 'users.email' - Code: 23000
+2024-06-18 17:19:27 - Undefined array key "pwd" - Code: 2
+2024-06-18 17:19:35 - Undefined array key "pwd" - Code: 2
+2024-06-18 17:23:22 - Undefined array key "pwd" - Code: 2
+2024-06-19 10:19:07 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '4321 2345 1234 5231' for key 'bookings.card_number_UNIQUE' - Code: 23000
+2024-06-19 10:20:13 - SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`rent_a_car`.`bookings`, CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)) - Code: 23000
+2024-06-19 10:20:22 - SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`rent_a_car`.`bookings`, CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)) - Code: 23000
+2024-06-19 10:21:18 - SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`rent_a_car`.`bookings`, CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)) - Code: 23000
+2024-06-19 10:21:27 - SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`rent_a_car`.`bookings`, CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)) - Code: 23000
+2024-06-19 10:28:48 - SQLSTATE[HY000]: General error: 1364 Field 'new_pwd' doesn't have a default value - Code: HY000
+2024-06-19 10:28:55 - SQLSTATE[HY000]: General error: 1364 Field 'new_pwd' doesn't have a default value - Code: HY000
+2024-06-19 10:36:01 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email' - Code: 23000
+2024-06-19 10:36:14 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email' - Code: 23000
