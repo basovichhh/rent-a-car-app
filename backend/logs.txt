@@ -12,3 +12,5 @@
 2024-06-19 10:28:55 - SQLSTATE[HY000]: General error: 1364 Field 'new_pwd' doesn't have a default value - Code: HY000
 2024-06-19 10:36:01 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email' - Code: 23000
 2024-06-19 10:36:14 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email' - Code: 23000
+2024-06-25 19:58:44 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email' - Code: 23000
+2024-06-25 19:59:08 - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email' - Code: 23000

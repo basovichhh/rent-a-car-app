@@ -1,4 +1,3 @@
-/* styles.css */
 
 body {
     background-image: url(../images/bg_2.jpg);
@@ -10,13 +9,13 @@ body {
 h1, h5 {
     color: white;
     font-weight: bold;
-    text-align: center; /* Center align headings */
+    text-align: center; 
 }
 
 .button {
-    display: block; /* Change display to block */
-    width: fit-content; /* Set width to fit content */
-    margin: 0 auto 10px; /* Center horizontally and add margin bottom */
+    display: block; 
+    width: fit-content; 
+    margin: 0 auto 10px; 
     margin-top: 20px;
     background-color: #007bff;
     color: #fff;
@@ -34,7 +33,7 @@ h1, h5 {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: #65a728; /* Different color */
+    background-color: #65a728; 
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -46,11 +45,11 @@ h1, h5 {
     background-color: #218838;
 }
 
-#log-out{
+#log-out {
     position: absolute;
     top: 70px;
     left: 20px;
-    background-color: #65a728; /* Different color */
+    background-color: #65a728; 
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -58,27 +57,107 @@ h1, h5 {
     cursor: pointer;
 }
 
-#log-out:hover{
+#log-out:hover {
     background-color: #218838;
 }
 
 .modal-body, .modal-footer {
-    text-align: center; /* Center align modal body and footer */
+    text-align: center; 
 }
 
 .modal-dialog {
-    margin: 100px auto; /* Center modal vertically and horizontally */
+    margin: 100px auto; 
 }
 
 .modal-title {
-    color: #007bff; /* Change modal title color */
+    color: #007bff; 
     font-weight: bold;
 }
 
 .modal-content {
-    background-color: #f8f9fa; /* Change modal background color */
+    background-color: #f8f9fa;
 }
 
 .modal-footer {
-    justify-content: center; /* Center align buttons in modal footer */
+    justify-content: center;
+}
+
+/* Booking Modal */
+#bookingModal .modal-dialog {
+    max-width: 90%;
+}
+
+#bookingModal .modal-body {
+    overflow-x: auto;
+}
+
+/* Booking Table */
+#bookingModal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    margin-top: 15px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+#bookingModal th, #bookingModal td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+}
+
+#bookingModal th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#bookingModal tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#bookingModal tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Users Modal */
+#getAllUsersModal .modal-dialog {
+    max-width: 90%;
+}
+
+#getAllUsersModal .modal-body {
+    overflow-x: auto;
+}
+
+/* Users Table */
+#getAllUsersModal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    margin-top: 15px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+#getAllUsersModal th, #getAllUsersModal td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+}
+
+#getAllUsersModal th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#getAllUsersModal tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#getAllUsersModal tbody tr:hover {
+    background-color: #e9ecef;
 }

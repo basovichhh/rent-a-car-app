@@ -194,34 +194,34 @@ if (token){
           });
       
       
-      $('#getAllUsersModal').click(function () {
-          $.ajax({
-              url: "http://localhost/rent-a-car-app/backend/api/users",
-              type: "GET",
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-              success: function (users) {
-                  $('#userList').empty();
-                  users.forEach(function(user) {
-                      var userHtml = '<div class="user">';
-                      userHtml += '<p><strong>ID:</strong> ' + user.id + '</p>';
-                      userHtml += '<p><strong>Email:</strong> ' + user.email + '</p>';
-                      userHtml += '<p><strong>Name:</strong> ' + user.first_name + '</p>';
-                      userHtml += '<p><strong>Surname:</strong> ' + user.last_name + '</p>';
-                      userHtml += '</div>';
-                      userHtml += '<hr>';
-                      $('#userList').append(userHtml);
-                  });
-                  // Show the modal
-                  $('#getAllUsersModal').modal('show');
-              },
-              error: function (error) {
-                  console.error('Failed to fetch users:', error.statusText);
-                  alert("Failed to fetch users. Please try again later.");
-              }
-          });
-      });
+          $('#getAllUsersModal').click(function () {
+            $.ajax({
+                url: "http://localhost/rent-a-car-app/backend/api/users",
+                type: "GET",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                success: function (users) {
+                    $('#usersTableBody').empty();  // Clear existing data in the table body
+                    users.forEach(function(user) {
+                        var userRow = '<tr>';
+                        userRow += '<td>' + user.id + '</td>';
+                        userRow += '<td>' + user.email + '</td>';
+                        userRow += '<td>' + user.first_name + '</td>';
+                        userRow += '<td>' + user.last_name + '</td>';
+                        userRow += '</tr>';
+                        $('#usersTableBody').append(userRow);
+                    });
+                    // Show the modal
+                    $('#getAllUsersModal').modal('show');
+                },
+                error: function (error) {
+                    console.error('Failed to fetch users:', error.statusText);
+                    alert("Failed to fetch users. Please try again later.");
+                }
+            });
+        });
+        
       
       $(document).ready(function() {
         $('#add-user').click(function () {
@@ -286,9 +286,11 @@ if (token){
           });
       
       
-          $('#getAllBookingsModal').click(function () {
+          
+          $('#getAllBookingsBtn').click(function () {
             var token = localStorage.getItem("token");
             console.log("Token from localStorage:", token);
+            
             $.ajax({
                 url: "http://localhost/rent-a-car-app/backend/api/bookings",
                 type: "GET",
@@ -296,30 +298,38 @@ if (token){
                     Authorization: "Bearer " + token,
                 },
                 success: function (bookings) {
-                    $('#bookingList').empty();
+                    $('#bookingTableBody').empty(); // Clear existing data
+        
                     if (bookings.length === 0) {
-                        $('#bookingList').html('<p>No bookings found.</p>');
+                        $('#bookingTableBody').html('<tr><td colspan="12">No bookings found.</td></tr>');
                     } else {
                         bookings.forEach(function(booking) {
-                            var bookingHtml = '<div class="booking">';
-                            bookingHtml += '<p><strong>Booking ID:</strong> ' + booking.id + '</p>';
-                            bookingHtml += '<p><strong>User ID:</strong> ' + booking.user_id + '</p>';
-                            bookingHtml += '<p><strong>Car ID:</strong> ' + booking.car_id + '</p>';
-                            bookingHtml += '<p><strong>Pick up Location:</strong> ' + booking.pickup_location + '</p>';
-                            bookingHtml += '<p><strong>Drop off Location:</strong> ' + booking.dropoff_location + '</p>';
-                            bookingHtml += '<p><strong>Pick up Date:</strong> ' + booking.pickup_date + '</p>';
-                            bookingHtml += '<p><strong>Drop off Date:</strong> ' + booking.dropoff_date + '</p>';
-                            bookingHtml += '<p><strong>Card holder name:</strong> ' + booking.card_holder_name + '</p>';
-                            bookingHtml += '<p><strong>Card number:</strong> ' + booking.card_number + '</p>';
-                            bookingHtml += '<p><strong>Exp. date:</strong> ' + booking.exp_date + '</p>';
-                            bookingHtml += '<p><strong>CCV:</strong> ' + booking.ccv + '</p>';
-                            bookingHtml += '<p><strong>Zip code:</strong> ' + booking.zip_code + '</p>';
-                            bookingHtml += '</div>';
-                            bookingHtml += '<hr>';
-                            $('#bookingList').append(bookingHtml);
+                            var rowHtml = '<tr>';
+                            rowHtml += '<td>' + booking.id + '</td>';
+                            rowHtml += '<td>' + booking.user_id + '</td>';
+                            rowHtml += '<td>' + booking.car_id + '</td>';
+                            rowHtml += '<td>' + booking.pickup_location + '</td>';
+                            rowHtml += '<td>' + booking.dropoff_location + '</td>';
+                            rowHtml += '<td>' + booking.pickup_date + '</td>';
+                            rowHtml += '<td>' + booking.dropoff_date + '</td>';
+                            rowHtml += '<td>' + booking.card_holder_name + '</td>';
+                            
+                            // Masking card number
+                            var maskedCardNumber = '**** **** **** ' + booking.card_number.slice(-4);
+                            rowHtml += '<td>' + maskedCardNumber + '</td>';
+
+                            rowHtml += '<td>' + booking.exp_date + '</td>';
+
+                            var maskedCCV = '**' + booking.ccv.slice(-1);
+                            rowHtml += '<td>' + maskedCCV + '</td>';
+                            
+                        
+                            rowHtml += '<td>' + booking.zip_code + '</td>';
+                            rowHtml += '</tr>';
+                            $('#bookingTableBody').append(rowHtml);
                         });
                     }
-                    $('#getAllBookingsModal').modal('show');
+                    $('#bookingModal').modal('show'); // Show the modal after data is loaded
                 },
                 error: function (error) {
                     console.error('Failed to fetch bookings:', error.statusText);
@@ -328,6 +338,8 @@ if (token){
             });
         });
         
+        
+          
       
       });
       
